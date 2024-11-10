@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>✨ Epic Countdown ✨</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+      body {
+        background-color: #0ff;
+        color: #00ff00;
+        font-family: "Comic Sans MS", "Comic Sans", cursive;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      h1 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        text-shadow: 3px 3px 0px #ff0000, 6px 6px 0px #0000ff;
+      }
+      #timer {
+        font-size: 3rem;
+        padding: 20px;
+        background-color: #ffff00;
+        border: 10px solid #000000;
+        box-shadow: 10px 10px 0px #ff0000;
+        margin-bottom: 2rem;
+      }
+      .footer-text {
+        font-size: 2rem;
+        margin-top: 2rem;
+        color: #ffffff;
+        text-shadow: 2px 2px #000000;
+      }
+      .fish {
+        position: absolute;
+        height: auto;
+        left: 0px;
+        width: 120px;
+        fill: #8cbcff;
+        animation: swim 10s linear infinite alternate, hue-rotate 5s linear infinite;
+      }
+      @keyframes swim {
+        0% {
+          transform: translateY(0) translateX(0) rotate(0deg);
+        }
+        25% {
+          transform: translateY(-50px) translateX(20vw) rotate(20deg);
+        }
+        50% {
+          transform: translateY(0) translateX(40vw) rotate(0deg);
+        }
+        75% {
+          transform: translateY(50px) translateX(60vw) rotate(-20deg);
+        }
+        100% {
+          transform: translateY(0) translateX(80vw) rotate(0deg);
+        }
+      }
+      @keyframes hue-rotate {
+        0% {
+          filter: hue-rotate(0deg);
+        }
+        100% {
+          filter: hue-rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="../index.html" class="navbar-item">Home</a>
+      <a href="../projects.html" class="navbar-item">Projects</a>
+    </div>
+    <h1>🚨 days until amy unbanned 🚨</h1>
+    <div id="timer">Loading...</div>
+    <div class="footer-text">Are you ready? 😂</div>
+    <img src="/assets/images/fish.svg" class="fish" style="top: 10%; right:20%; animation-duration: 4s" />
+    <img src="/assets/images/fish.svg" class="fish" style="top: 30%; animation-duration: 30" />
+    <img src="/assets/images/fish.svg" class="fish" style="top: 69%; right:30%; animation-duration: 10s" />
+    <img src="/assets/images/fish.svg" class="fish" style="top: 50%; animation-duration: 12s" />
+    <img src="/assets/images/fish.svg" class="fish" style="top: 70%; animation-duration: 2s" />
+
+    <script>
+      const countdownDate = new Date("August 25, 2025 00:08:00").getTime();
+      const x = setInterval(function () {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        document.getElementById("timer").innerHTML =
+          days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("timer").innerHTML = "IT'S TIME! 😎";
+        }
+      }, 1000);
+
+      function random() {
+        const randomColor = `#${Math.floor(Math.random() * 16777215).toString(
+          16
+        )}`;
+        document.body.style.backgroundColor = randomColor;
+      }
+      const fishes = document.querySelectorAll(".fish");
+      fishes.forEach((fish) => {
+        fish.addEventListener("click", () => {
+          console.log("blub");
+          const rizz = new Audio(
+            "https://www.myinstants.com/media/sounds/rizz-sound-effect.mp3"
+          );
+          rizz.play();
+          random();
+        });
+      });
+    </script>
+  </body>
+</html>

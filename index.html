@@ -1,124 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>✨ Epic Countdown ✨</title>
+    <title>✨ 0melette's Epic Corner ✨</title>
     <style>
-      body {
-        background-color: #0ff;
-        color: #00ff00;
-        font-family: "Comic Sans MS", "Comic Sans", cursive;
-        text-align: center;
-        padding: 0;
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-      }
-      h1 {
-        font-size: 4rem;
-        margin-bottom: 1rem;
-        text-shadow: 3px 3px 0px #ff0000, 6px 6px 0px #0000ff;
-      }
-      #timer {
-        font-size: 3rem;
-        padding: 20px;
-        background-color: #ffff00;
-        border: 10px solid #000000;
-        box-shadow: 10px 10px 0px #ff0000;
-        margin-bottom: 2rem;
-      }
-      .footer-text {
-        font-size: 2rem;
-        margin-top: 2rem;
-        color: #ffffff;
-        text-shadow: 2px 2px #000000;
-      }
-      .fish {
-        position: absolute;
-        height: auto;
-        left: 0px;
-        width: 120px;
-        fill: #8cbcff;
-        animation: swim 10s linear infinite alternate, hue-rotate 5s linear infinite;
-      }
-      @keyframes swim {
-        0% {
-          transform: translateY(0) translateX(0) rotate(0deg);
+        body {
+            background-color: #C0C0C0;
+            color: #000000;
+            font-family: "Tahoma", "Arial", sans-serif;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        25% {
-          transform: translateY(-50px) translateX(20vw) rotate(20deg);
+
+        .navbar {
+            width: 100%;
+            background-color: #C0C0C0;
+            border-bottom: 2px solid #808080;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            box-sizing: border-box;
         }
-        50% {
-          transform: translateY(0) translateX(40vw) rotate(0deg);
+
+        .navbar-item {
+            margin-right: 1rem;
+            font-family: "Tahoma", "Arial", sans-serif;
+            font-size: 1rem;
+            color: #000000;
+            cursor: pointer;
+            user-select: none;
+            padding: 0.5rem 1rem;
+            border: 2px solid #C0C0C0;
+            border-top-color: #FFFFFF;
+            border-left-color: #FFFFFF;
+            border-bottom-color: #808080;
+            border-right-color: #808080;
+            background-color: #C0C0C0;
         }
-        75% {
-          transform: translateY(50px) translateX(60vw) rotate(-20deg);
+
+        .navbar-item:active {
+            border-top-color: #808080;
+            border-left-color: #808080;
+            border-bottom-color: #FFFFFF;
+            border-right-color: #FFFFFF;
         }
-        100% {
-          transform: translateY(0) translateX(80vw) rotate(0deg);
+
+        .container {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-      }
-      @keyframes hue-rotate {
-        0% {
-          filter: hue-rotate(0deg);
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: normal;
         }
-        100% {
-          filter: hue-rotate(360deg);
+
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1rem 0;
         }
-      }
+
+        .nav-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-family: inherit;
+            background-color: #C0C0C0;
+            border: 2px solid #808080;
+            border-right-color: #FFFFFF;
+            border-bottom-color: #FFFFFF;
+            border-left-color: #808080;
+            border-top-color: #808080;
+            text-decoration: none;
+            color: #000000;
+            cursor: pointer;
+            box-sizing: border-box;
+            margin: 0.5rem;
+        }
+
+        .nav-button:active {
+            border-right-color: #808080;
+            border-bottom-color: #808080;
+            border-left-color: #FFFFFF;
+            border-top-color: #FFFFFF;
+        }
+
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .action-button {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #C0C0C0;
+            border: 2px solid #808080;
+            border-right-color: #FFFFFF;
+            border-bottom-color: #FFFFFF;
+            border-left-color: #808080;
+            border-top-color: #808080;
+            cursor: pointer;
+            font-family: inherit;
+            color: #000000;
+            margin: 0.5rem;
+        }
+
+        .action-button:active {
+            border-right-color: #808080;
+            border-bottom-color: #808080;
+            border-left-color: #FFFFFF;
+            border-top-color: #FFFFFF;
+        }
+
+        #fontPicker {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #C0C0C0;
+            border: 2px solid #808080;
+            border-right-color: #FFFFFF;
+            border-bottom-color: #FFFFFF;
+            border-left-color: #808080;
+            border-top-color: #808080;
+            font-family: inherit;
+            color: #000000;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+
+        #colorButton {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #C0C0C0;
+            border: 2px solid #808080;
+            border-right-color: #FFFFFF;
+            border-bottom-color: #FFFFFF;
+            border-left-color: #808080;
+            border-top-color: #808080;
+            cursor: pointer;
+            font-family: inherit;
+            color: #000000;
+            margin: 0.5rem;
+        }
+
+        .music-note {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 2rem;
+            animation: float 3s linear infinite;
+            display: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-100px, -200px);
+                opacity: 0;
+            }
+        }
     </style>
-  </head>
-  <body>
-    <h1>🚨 days until amy unbanned 🚨</h1>
-    <div id="timer">Loading...</div>
-    <div class="footer-text">Are you ready? 😂</div>
-    <img src="fish.svg" class="fish" style="top: 10%; right:20%; animation-duration: 4s" />
-    <img src="fish.svg" class="fish" style="top: 30%; animation-duration: 30" />
-    <img src="fish.svg" class="fish" style="top: 69%; right:30%; animation-duration: 10s" />
-    <img src="fish.svg" class="fish" style="top: 50%; animation-duration: 12s" />
-    <img src="fish.svg" class="fish" style="top: 70%; animation-duration: 2s" />
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html" class="navbar-item">Home</a>
+        <a href="projects.html" class="navbar-item">Projects</a>
+    </div>
+
+    <div class="container">
+        <h1>0melette</h1>
+        <div class="greeting-box">
+            <p id="greetingPrompt">
+                who am i speaking to?
+                <input type="text" id="nameInput" style="padding: 0.5rem;">
+            </p>
+            <p id="greetingMessage"></p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="countdown/fish.html" class="nav-button">⏰ Countdown Timer ⏰</a>
+            <a href="countdown/melbourne.html" class="nav-button">melbourne</a>
+        </div>
+
+        <div>
+            <button id="colorButton" class="action-button">Change Colour</button>
+            <input type="color" id="colorPicker" style="display: none;">
+            <select id="fontPicker" class="action-button">
+                <option value="" disabled selected>Change Font</option>
+                <option value="'Tahoma', 'Arial', sans-serif">Tahoma</option>
+                <option value="'Arial', sans-serif">Arial</option>
+                <option value="'Times New Roman', serif">Times New Roman</option>
+                <option value="'Courier New', monospace">Courier New</option>
+                <option value="'Verdana', sans-serif">Verdana</option>
+            </select>
+            <button id="randomButton" class="action-button">Random</button>
+            <button id="defaultButton" class="action-button">Return to Default</button>
+        </div>
+    </div>
+    
+
+    <div class="music-player">
+        <button id="playButton" class="action-button">Play Music</button>
+    </div>
+
+    <div id="musicNote" class="music-note">♪</div>
 
     <script>
-      const countdownDate = new Date("August 25, 2025 00:08:00").getTime();
-      const x = setInterval(function () {
-        const now = new Date().getTime();
-        const distance = countdownDate - now;
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        document.getElementById("timer").innerHTML =
-          days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-        if (distance < 0) {
-          clearInterval(x);
-          document.getElementById("timer").innerHTML = "IT'S TIME! 😎";
-        }
-      }, 1000);
+        let audio;
+        let musicPlaying = false;
+        let musicNoteInterval;
 
-      function random() {
-        const randomColor = `#${Math.floor(Math.random() * 16777215).toString(
-          16
-        )}`;
-        document.body.style.backgroundColor = randomColor;
-      }
-      const fishes = document.querySelectorAll(".fish");
-      fishes.forEach((fish) => {
-        fish.addEventListener("click", () => {
-          console.log("blub");
-          const rizz = new Audio(
-            "https://www.myinstants.com/media/sounds/rizz-sound-effect.mp3"
-          );
-          rizz.play();
-          random();
+        function initAudio() {
+            audio = new Audio('assets/audio/Kalimba.mp3');
+            audio.loop = true;
+        }
+
+        function toggleMusic() {
+            if (!audio) {
+                initAudio();
+            }
+
+            if (audio.paused) {
+                audio.play();
+                musicPlaying = true;
+                document.getElementById('playButton').textContent = 'Pause Music';
+                startMusicNotes();
+            } else {
+                audio.pause();
+                musicPlaying = false;
+                document.getElementById('playButton').textContent = 'Play Music';
+                stopMusicNotes();
+            }
+        }
+
+        function random() {
+            const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+            document.body.style.backgroundColor = randomColor;
+        }
+
+        function resetDefaults() {
+            document.body.style.backgroundColor = '#C0C0C0';
+            document.body.style.fontFamily = '"Tahoma", "Arial", sans-serif';
+        }
+
+        function startMusicNotes() {
+            const musicNote = document.getElementById('musicNote');
+            musicNote.style.display = 'block';
+            musicNoteInterval = setInterval(() => {
+                const noteClone = musicNote.cloneNode(true);
+                noteClone.style.left = Math.random() * window.innerWidth + 'px';
+                noteClone.style.top = window.innerHeight + 'px';
+                document.body.appendChild(noteClone);
+                setTimeout(() => {
+                    noteClone.remove();
+                }, 3000);  // Remove the note after 3 seconds
+            }, 500);
+        }
+
+        function stopMusicNotes() {
+            clearInterval(musicNoteInterval);
+            const notes = document.querySelectorAll('.music-note:not(#musicNote)');
+            notes.forEach(note => {
+                note.remove();
+            });
+        }
+
+        document.getElementById('playButton').addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleMusic();
         });
-      });
+
+        document.getElementById('nameInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                greetUser();
+            }
+        });
+
+        function greetUser() {
+            var nameInput = document.getElementById('nameInput');
+            var name = nameInput.value;
+            if (name) {
+                document.getElementById('greetingMessage').textContent = 'Hello, ' + name + '!';
+                document.getElementById('greetingPrompt').style.display = 'none';
+            }
+        }
+
+        document.getElementById('colorButton').addEventListener('click', function() {
+            document.getElementById('colorPicker').click();
+        });
+
+        document.getElementById('colorPicker').addEventListener('input', function() {
+            document.body.style.backgroundColor = this.value;
+        });
+
+        document.getElementById('fontPicker').addEventListener('change', function() {
+            var selectedFont = this.value;
+            if (selectedFont) {
+                document.body.style.fontFamily = selectedFont;
+            }
+        });
+
+        document.getElementById('randomButton').addEventListener('click', function() {
+            random();
+        });
+
+        document.getElementById('defaultButton').addEventListener('click', function() {
+            resetDefaults();
+        });
     </script>
-  </body>
+</body>
 </html>
