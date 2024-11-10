@@ -9,8 +9,6 @@
     position: fixed;
     top: 0;
     left: 0;
-    margin-bottom: 200px; 
-    
 }
 .navbar-item {
     margin-right: 1rem;
@@ -33,5 +31,13 @@
     border-left-color: #808080;
     border-bottom-color: #FFFFFF;
     border-right-color: #FFFFFF;
+}
+
+body {
+    padding-top: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 

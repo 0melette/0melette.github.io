@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Diagnostic</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <div class="navbar">
+        <a href="../../index.html" class="navbar-item">Home</a>
+        <a href="../../projects.html" class="navbar-item">Projects</a>
+        <a href="../../experiments.html" class="navbar-item">Experimentations!!!</a>
+        <a href="../../to-do.html" class="navbar-item">TO:DO</a>
+    </div>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+
+        .diagnostic-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .status {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 6px;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .detail {
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="diagnostic-panel">
+        <h2>Device Diagnostic Results</h2>
+        <div id="results"></div>
+        <button id="requestPermission">Request Motion Access</button>
+        <button id="runTests">Run All Tests</button>
+    </div>
+
+    <script>
+        const results = document.getElementById('results');
+        
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.textContent = message;
+            results.appendChild(div);
+        }
+
+        function addDetail(label, value) {
+            const div = document.createElement('div');
+            div.className = 'detail';
+            div.textContent = `${label}: ${value}`;
+            results.appendChild(div);
+        }
+
+        function checkDeviceType() {
+            addDetail('User Agent', navigator.userAgent);
+            
+            // iOS detection
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            if (isIOS) {
+                addResult('iOS device detected', 'warning');
+                addDetail('iOS Version', getiOSVersion());
+            }
+
+            // Android detection
+            const isAndroid = /Android/.test(navigator.userAgent);
+            if (isAndroid) {
+                addResult('Android device detected', 'success');
+                const match = navigator.userAgent.match(/Android\s([0-9.]*)/);
+                addDetail('Android Version', match ? match[1] : 'Unknown');
+            }
+
+            // Desktop detection
+            if (!isIOS && !isAndroid) {
+                addResult('Desktop browser detected', 'warning');
+            }
+        }
+
+        function getiOSVersion() {
+            const agent = window.navigator.userAgent;
+            const start = agent.indexOf('OS ');
+            if ((agent.indexOf('iPhone') > -1 || agent.indexOf('iPad') > -1) && start > -1) {
+                return agent.substr(start + 3, 3).replace('_', '.');
+            }
+            return 'Unknown';
+        }
+
+        function checkMotionSupport() {
+            if (window.DeviceMotionEvent) {
+                addResult('DeviceMotionEvent is supported', 'success');
+                
+                if (typeof DeviceMotionEvent.requestPermission === 'function') {
+                    addResult('iOS requires permission for motion sensors', 'warning');
+                } else {
+                    addResult('Direct motion sensor access available', 'success');
+                }
+            } else {
+                addResult('DeviceMotionEvent is NOT supported', 'error');
+            }
+        }
+
+        function checkOrientationSupport() {
+            if (window.DeviceOrientationEvent) {
+                addResult('DeviceOrientationEvent is supported', 'success');
+                
+                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                    addResult('iOS requires permission for orientation sensors', 'warning');
+                } else {
+                    addResult('Direct orientation sensor access available', 'success');
+                }
+            } else {
+                addResult('DeviceOrientationEvent is NOT supported', 'error');
+            }
+        }
+
+        function requestIOSPermissions() {
+            if (typeof DeviceMotionEvent.requestPermission === 'function') {
+                DeviceMotionEvent.requestPermission()
+                    .then(permissionState => {
+                        addResult(`Motion permission: ${permissionState}`, 
+                            permissionState === 'granted' ? 'success' : 'warning');
+                        
+                        return DeviceOrientationEvent.requestPermission();
+                    })
+                    .then(permissionState => {
+                        addResult(`Orientation permission: ${permissionState}`,
+                            permissionState === 'granted' ? 'success' : 'warning');
+                    })
+                    .catch(error => {
+                        addResult(`Permission error: ${error.message}`, 'error');
+                    });
+            } else {
+                addResult('No permission required for this device', 'success');
+            }
+        }
+
+        function testMotionSensor() {
+            let testTimeout = setTimeout(() => {
+                addResult('No motion events received after 3 seconds', 'error');
+            }, 3000);
+
+            window.addEventListener('devicemotion', (event) => {
+                clearTimeout(testTimeout);
+                const acceleration = event.accelerationIncludingGravity;
+                if (acceleration) {
+                    addDetail('Acceleration X', acceleration.x?.toFixed(2) || 'null');
+                    addDetail('Acceleration Y', acceleration.y?.toFixed(2) || 'null');
+                    addDetail('Acceleration Z', acceleration.z?.toFixed(2) || 'null');
+                } else {
+                    addResult('No acceleration data available', 'error');
+                }
+            }, { once: true });
+        }
+
+        document.getElementById('requestPermission').addEventListener('click', () => {
+            results.innerHTML = '';
+            requestIOSPermissions();
+        });
+
+        document.getElementById('runTests').addEventListener('click', () => {
+            results.innerHTML = '';
+            addResult('Running device diagnostics...', 'info');
+            checkDeviceType();
+            checkMotionSupport();
+            checkOrientationSupport();
+            testMotionSensor();
+        });
+
+        checkDeviceType();
+        checkMotionSupport();
+        checkOrientationSupport();
+    </script>
+</body>
+</html>
