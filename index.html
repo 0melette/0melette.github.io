@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -169,6 +170,7 @@
                 transform: translate(0, 0);
                 opacity: 1;
             }
+
             100% {
                 transform: translate(-100px, -200px);
                 opacity: 0;
@@ -206,8 +208,32 @@
             stroke: #FFFFFF;
             stroke-width: 2.5;
         }
+
+        #me {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: normal;
+            transition: font-size 0.3s ease;
+            cursor: url('./assets/images/el-gato.jpg'), auto;
+        }
+
+        #me:hover {
+            font-size: 4rem;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="navbar">
         <a href="index.html" class="navbar-item">Home</a>
@@ -216,7 +242,7 @@
         <a href="to-do.html" class="navbar-item">TO:DO</a>
     </div>
     <div class="container">
-        <h1>0melette</h1>
+        <h1 id="me">0melette</h1>
         <div class="greeting-box">
             <p id="greetingPrompt">
                 who am i speaking to?
@@ -226,11 +252,14 @@
         </div>
 
         <div class="nav-buttons">
-            <a href="countdown/fish.html" class="nav-button">fish 1 year ban</a>
+            <a href="countdown/fish.html" class="nav-button">fish</a>
             <a href="countdown/melbourne.html" class="nav-button">melbourne</a>
             <a href="https://github.com/0melette" target="_blank" class="github-button">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                    </path>
                 </svg>
             </a>
         </div>
@@ -250,7 +279,7 @@
             <button id="defaultButton" class="action-button">Return to Default</button>
         </div>
     </div>
-    
+
 
     <div class="music-player">
         <button id="playButton" class="action-button">Play Music</button>
@@ -323,7 +352,7 @@
             toggleMusic();
         });
 
-        document.getElementById('nameInput').addEventListener('keypress', function(event) {
+        document.getElementById('nameInput').addEventListener('keypress', function (event) {
             if (event.key === 'Enter') {
                 greetUser();
             }
@@ -338,28 +367,29 @@
             }
         }
 
-        document.getElementById('colorButton').addEventListener('click', function() {
+        document.getElementById('colorButton').addEventListener('click', function () {
             document.getElementById('colorPicker').click();
         });
 
-        document.getElementById('colorPicker').addEventListener('input', function() {
+        document.getElementById('colorPicker').addEventListener('input', function () {
             document.body.style.backgroundColor = this.value;
         });
 
-        document.getElementById('fontPicker').addEventListener('change', function() {
+        document.getElementById('fontPicker').addEventListener('change', function () {
             var selectedFont = this.value;
             if (selectedFont) {
                 document.body.style.fontFamily = selectedFont;
             }
         });
 
-        document.getElementById('randomButton').addEventListener('click', function() {
+        document.getElementById('randomButton').addEventListener('click', function () {
             random();
         });
 
-        document.getElementById('defaultButton').addEventListener('click', function() {
+        document.getElementById('defaultButton').addEventListener('click', function () {
             resetDefaults();
         });
     </script>
 </body>
+
 </html>

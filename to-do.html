@@ -149,10 +149,6 @@
             sprinkle.style.left = Math.random() * window.innerWidth + 'px';
             sprinkle.innerHTML = ['✨', '🎉', '⭐'][Math.floor(Math.random() * 3)];
             document.body.appendChild(sprinkle);
-
-            setTimeout(() => {
-                sprinkle.remove();
-            }, 2000);
         }
 
         function startSprinkles() {
