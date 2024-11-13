@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,11 +12,78 @@
             padding: 0;
         }
 
-        .todo-list li {
+        .todo-item {
+            display: flex;
+            align-items: center;
             margin: 8px 0;
+            font-size: 16px;
+        }
+
+        .todo-item input[type="checkbox"] {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .celebration {
+            margin-top: 20px;
+            margin-left: 20px;
+            font-size: 18px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .celebration.show {
+            opacity: 1;
+            height: auto;
+        }
+
+        .personal-note {
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 10px;
+            margin-left: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .personal-note.show {
+            opacity: 1;
+            height: auto;
+        }
+
+        .sprinkle {
+            position: fixed;
+            pointer-events: none;
+            animation: fall 2s linear forwards;
+            top: -20px;
+            font-size: 20px;
+            z-index: 1000;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="navbar">
         <a href="index.html" class="navbar-item">Home</a>
@@ -24,25 +92,111 @@
         <a href="to-do.html" class="navbar-item">TO:DO</a>
     </div>
     <main>
-        <h1>TO:DO List</h1>
+        <h1>TO:DO 📝</h1>
         <ul class="todo-list">
-            <li>
-                <input type="checkbox">
-                <label>Use a web framework - probably Next.js</label>
+            <li class="todo-item">
+                <label>
+                    <input type="checkbox" checked disabled>
+                    <span>make a to-do list</span>
+                </label>
             </li>
-            <li>
-                <input type="checkbox">
-                <label>Become a CSS master</label>
+                     
+            <li class="todo-item">
+                <label>
+                    <input type="checkbox">
+                    Use a web framework - probably Next.js
+                </label>
             </li>
-            <li>
-                <input type="checkbox">
-                <label>Revive the abandoned projects I have</label>
+            <li class="todo-item">
+                <label>
+                    <input type="checkbox">
+                    Become a CSS master
+                </label>
             </li>
-            <li>
-                <input type="checkbox">
-                <label>Drive a car</label>
+            <li class="todo-item">
+                <label>
+                    <input type="checkbox">
+                    Revive the abandoned projects I have
+                </label>
+            </li>
+            <li class="todo-item">
+                <label>
+                    <input type="checkbox">
+                    Drive a car
+                </label>
+            </li>
+            <li class="todo-item">
+                <label>
+                    <input type="checkbox">
+                    Farm timuns 🥒
+                </label>
             </li>
         </ul>
+        <div class="celebration">you did it !!!!!</div>
+        <div class="personal-note">(this is for me not you !!)</div>
     </main>
+
+    <script>
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const celebration = document.querySelector('.celebration');
+        const personalNote = document.querySelector('.personal-note');
+        let sprinkleInterval;
+        let isSprinkling = false;
+
+        function createSprinkle() {
+            const sprinkle = document.createElement('div');
+            sprinkle.className = 'sprinkle';
+            sprinkle.style.left = Math.random() * window.innerWidth + 'px';
+            sprinkle.innerHTML = ['✨', '🎉', '⭐'][Math.floor(Math.random() * 3)];
+            document.body.appendChild(sprinkle);
+
+            setTimeout(() => {
+                sprinkle.remove();
+            }, 2000);
+        }
+
+        function startSprinkles() {
+            if (!isSprinkling) {
+                isSprinkling = true;
+                sprinkleInterval = setInterval(createSprinkle, 200);
+                setTimeout(() => {
+                    stopSprinkles();
+                }, 5000);
+            }
+        }
+
+        function stopSprinkles() {
+            if (isSprinkling) {
+                isSprinkling = false;
+                clearInterval(sprinkleInterval);
+                document.querySelectorAll('.sprinkle').forEach(sprinkle => sprinkle.remove());
+            }
+        }
+
+        function checkCompletion() {
+            const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+            if (allChecked) {
+                celebration.classList.add('show');
+                startSprinkles();
+                const celebrationSound = new Audio("https://www.myinstants.com/media/sounds/thick-of-it.mp3");
+                celebrationSound.play().catch(error => {
+                    console.error("Error playing the celebration sound:", error);
+                });
+                setTimeout(() => {
+                    personalNote.classList.add('show');
+                }, 2000);
+            } else {
+                celebration.classList.remove('show');
+                personalNote.classList.remove('show');
+                stopSprinkles();
+            }
+        }
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', checkCompletion);
+        });
+
+    </script>
 </body>
+
 </html>
