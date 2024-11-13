@@ -174,6 +174,38 @@
                 opacity: 0;
             }
         }
+
+        .github-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            padding: 0.5rem;
+            background-color: #000000;
+            border: 2px solid #808080;
+            border-right-color: #FFFFFF;
+            border-bottom-color: #FFFFFF;
+            border-left-color: #808080;
+            border-top-color: #808080;
+            cursor: pointer;
+            margin: 0.5rem;
+            text-decoration: none;
+        }
+
+        .github-button:active {
+            border-right-color: #808080;
+            border-bottom-color: #808080;
+            border-left-color: #FFFFFF;
+            border-top-color: #FFFFFF;
+        }
+
+        .github-button svg {
+            width: 24px;
+            height: 24px;
+            stroke: #FFFFFF;
+            stroke-width: 2.5;
+        }
     </style>
 </head>
 <body>
@@ -194,8 +226,13 @@
         </div>
 
         <div class="nav-buttons">
-            <a href="countdown/fish.html" class="nav-button">⏰ Countdown Timer ⏰</a>
+            <a href="countdown/fish.html" class="nav-button">fish 1 year ban</a>
             <a href="countdown/melbourne.html" class="nav-button">melbourne</a>
+            <a href="https://github.com/0melette" target="_blank" class="github-button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+            </a>
         </div>
 
         <div>
