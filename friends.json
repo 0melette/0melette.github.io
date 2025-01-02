@@ -1,0 +1,55 @@
+{
+    "amy": {
+        "css": {
+            "backgroundColor": "pink",
+            "fontFamily": "Comic Sans MS"
+        },
+        "message": "thats a nice name",
+        "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    "yunus": {
+        "alias": "yunz",
+        "message": "#1 cool guy",
+        "image": "https://avatars.githubusercontent.com/u/112053367?v=4",
+        "link":"https://github.com/yunz-dev",
+        "css": {
+            "backgroundColor": "lavender",
+            "fontFamily": "Comic Sans MS"
+        }
+    },
+    "mukund": {
+        "alias": "mks",
+        "message": "mukund is a cool guy",
+        "image": "https://avatars.githubusercontent.com/u/80872738?s=100&v=4",
+        "link":"https://github.com/Mukundks2004"
+    },
+    "simon": {
+        "alias": "monkeyboy",
+        "message": "🐵",
+        "image": "https://avatars.githubusercontent.com/u/53400613?v=4",
+        "link": "https://github.com/MonkieeBoi"
+    },
+    "andrew": {
+        "message": "andrew is a cool guy",
+        "image": "https://avatars.githubusercontent.com/u/40168823?v=4",
+        "link": "https://github.com/aparkgh"
+    },
+    "guhan": {
+        "message": "guhan",
+        "image": "https://t3.ftcdn.net/jpg/05/80/70/58/360_F_580705849_9UMLgo18yTdp97uQriP8zN9xpYwo8J6g.webp",
+        "sound": "https://www.myinstants.com/media/sounds/clown-circus-music.mp3",
+        "css": {
+            "className": "rainbow-bg",
+            "fontFamily": "Comic Sans MS"
+        }
+    },
+    "joyce": {
+        "message": "NEWJEANS ESCAPED HYBE!!!",
+        "image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/New_Jeans_%28EP%29.jpg/220px-New_Jeans_%28EP%29.jpg",
+        "sound": "https://www.myinstants.com/media/sounds/super-shy-reff.mp3",
+        "css": {
+            "backgroundColor": "#1cccac",
+            "fontFamily": "Gill Sans"
+        }
+    }
+}

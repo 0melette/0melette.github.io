@@ -1,395 +1,572 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>✨ 0melette's Epic Corner ✨</title>
     <style>
-        body {
-            background-color: #C0C0C0;
-            color: #000000;
-            font-family: "Tahoma", "Arial", sans-serif;
-            text-align: center;
-            padding: 0;
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+      body {
+        background-color: #c0c0c0;
+        color: #000000;
+        font-family: "Tahoma", "Arial", sans-serif;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .navbar {
+        width: 100%;
+        background-color: #c0c0c0;
+        border-bottom: 2px solid #808080;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+        box-sizing: border-box;
+      }
+
+      .navbar-item {
+        margin-right: 1rem;
+        font-family: "Tahoma", "Arial", sans-serif;
+        font-size: 1rem;
+        color: #000000;
+        cursor: pointer;
+        user-select: none;
+        padding: 0.5rem 1rem;
+        border: 2px solid #c0c0c0;
+        border-top-color: #ffffff;
+        border-left-color: #ffffff;
+        border-bottom-color: #808080;
+        border-right-color: #808080;
+        background-color: #c0c0c0;
+      }
+
+      .navbar-item:active {
+        border-top-color: #808080;
+        border-left-color: #808080;
+        border-bottom-color: #ffffff;
+        border-right-color: #ffffff;
+      }
+
+      .container {
+        padding: 2rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        font-weight: normal;
+      }
+
+      .nav-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 1rem 0;
+      }
+
+      .nav-button {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        font-family: inherit;
+        background-color: #c0c0c0;
+        border: 2px solid #808080;
+        border-right-color: #ffffff;
+        border-bottom-color: #ffffff;
+        border-left-color: #808080;
+        border-top-color: #808080;
+        text-decoration: none;
+        color: #000000;
+        cursor: pointer;
+        box-sizing: border-box;
+        margin: 0.5rem;
+      }
+
+      .nav-button:active {
+        border-right-color: #808080;
+        border-bottom-color: #808080;
+        border-left-color: #ffffff;
+        border-top-color: #ffffff;
+      }
+
+      .music-player {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+      }
+
+      .action-button {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: #c0c0c0;
+        border: 2px solid #808080;
+        border-right-color: #ffffff;
+        border-bottom-color: #ffffff;
+        border-left-color: #808080;
+        border-top-color: #808080;
+        cursor: pointer;
+        font-family: inherit;
+        color: #000000;
+        margin: 0.5rem;
+      }
+
+      .action-button:active {
+        border-right-color: #808080;
+        border-bottom-color: #808080;
+        border-left-color: #ffffff;
+        border-top-color: #ffffff;
+      }
+
+      #fontPicker {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: #c0c0c0;
+        border: 2px solid #808080;
+        border-right-color: #ffffff;
+        border-bottom-color: #ffffff;
+        border-left-color: #808080;
+        border-top-color: #808080;
+        font-family: inherit;
+        color: #000000;
+        cursor: pointer;
+        margin: 0.5rem;
+      }
+
+      #colorButton {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: #c0c0c0;
+        border: 2px solid #808080;
+        border-right-color: #ffffff;
+        border-bottom-color: #ffffff;
+        border-left-color: #808080;
+        border-top-color: #808080;
+        cursor: pointer;
+        font-family: inherit;
+        color: #000000;
+        margin: 0.5rem;
+      }
+
+      .music-note {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        font-size: 2rem;
+        animation: float 3s linear infinite;
+        display: none;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(0, 0);
+          opacity: 1;
         }
 
-        .navbar {
-            width: 100%;
-            background-color: #C0C0C0;
-            border-bottom: 2px solid #808080;
-            display: flex;
-            align-items: center;
-            padding: 0 1rem;
-            box-sizing: border-box;
+        100% {
+          transform: translate(-100px, -200px);
+          opacity: 0;
+        }
+      }
+
+      .github-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        padding: 0.5rem;
+        background-color: #000000;
+        border: 2px solid #808080;
+        border-right-color: #ffffff;
+        border-bottom-color: #ffffff;
+        border-left-color: #808080;
+        border-top-color: #808080;
+        cursor: pointer;
+        margin: 0.5rem;
+        text-decoration: none;
+      }
+
+      .github-button:active {
+        border-right-color: #808080;
+        border-bottom-color: #808080;
+        border-left-color: #ffffff;
+        border-top-color: #ffffff;
+      }
+
+      .github-button svg {
+        width: 24px;
+        height: 24px;
+        stroke: #ffffff;
+        stroke-width: 2.5;
+      }
+
+      #me {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        font-weight: normal;
+        transition: font-size 0.3s ease;
+        cursor: url("./assets/images/el-gato.jpg"), auto;
+      }
+
+      #me:hover {
+        font-size: 4rem;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
         }
 
-        .navbar-item {
-            margin-right: 1rem;
-            font-family: "Tahoma", "Arial", sans-serif;
-            font-size: 1rem;
-            color: #000000;
-            cursor: pointer;
-            user-select: none;
-            padding: 0.5rem 1rem;
-            border: 2px solid #C0C0C0;
-            border-top-color: #FFFFFF;
-            border-left-color: #FFFFFF;
-            border-bottom-color: #808080;
-            border-right-color: #808080;
-            background-color: #C0C0C0;
+        to {
+          transform: rotate(360deg);
         }
+      }
 
-        .navbar-item:active {
-            border-top-color: #808080;
-            border-left-color: #808080;
-            border-bottom-color: #FFFFFF;
-            border-right-color: #FFFFFF;
+      .media-container {
+        display: flex;
+        justify-content: center;
+        margin: 1rem 0;
+      }
+
+      .media-container img,
+      .media-container video {
+        max-width: 150px;
+        background-color: #c0c0c0;
+        border: 2px solid #c0c0c0;
+        border-top-color: #ffffff;
+        border-left-color: #ffffff;
+        border-bottom-color: #808080;
+        border-right-color: #808080;
+        box-sizing: border-box;
+        padding: 5px;
+        margin: 0 0.5rem;
+      }
+
+      .media-container video {
+        max-width: none !important;
+        width: 500px !important;
+      }
+
+      @keyframes rainbow {
+        0% {
+          background-color: red;
         }
-
-        .container {
-            padding: 2rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        16.7% {
+          background-color: orange;
         }
-
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            font-weight: normal;
+        33.3% {
+          background-color: yellow;
         }
-
-        .nav-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 1rem 0;
+        50% {
+          background-color: green;
         }
-
-        .nav-button {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            font-family: inherit;
-            background-color: #C0C0C0;
-            border: 2px solid #808080;
-            border-right-color: #FFFFFF;
-            border-bottom-color: #FFFFFF;
-            border-left-color: #808080;
-            border-top-color: #808080;
-            text-decoration: none;
-            color: #000000;
-            cursor: pointer;
-            box-sizing: border-box;
-            margin: 0.5rem;
+        66.7% {
+          background-color: blue;
         }
-
-        .nav-button:active {
-            border-right-color: #808080;
-            border-bottom-color: #808080;
-            border-left-color: #FFFFFF;
-            border-top-color: #FFFFFF;
+        83.3% {
+          background-color: indigo;
         }
-
-        .music-player {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
+        100% {
+          background-color: violet;
         }
+      }
 
-        .action-button {
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            background-color: #C0C0C0;
-            border: 2px solid #808080;
-            border-right-color: #FFFFFF;
-            border-bottom-color: #FFFFFF;
-            border-left-color: #808080;
-            border-top-color: #808080;
-            cursor: pointer;
-            font-family: inherit;
-            color: #000000;
-            margin: 0.5rem;
-        }
-
-        .action-button:active {
-            border-right-color: #808080;
-            border-bottom-color: #808080;
-            border-left-color: #FFFFFF;
-            border-top-color: #FFFFFF;
-        }
-
-        #fontPicker {
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            background-color: #C0C0C0;
-            border: 2px solid #808080;
-            border-right-color: #FFFFFF;
-            border-bottom-color: #FFFFFF;
-            border-left-color: #808080;
-            border-top-color: #808080;
-            font-family: inherit;
-            color: #000000;
-            cursor: pointer;
-            margin: 0.5rem;
-        }
-
-        #colorButton {
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            background-color: #C0C0C0;
-            border: 2px solid #808080;
-            border-right-color: #FFFFFF;
-            border-bottom-color: #FFFFFF;
-            border-left-color: #808080;
-            border-top-color: #808080;
-            cursor: pointer;
-            font-family: inherit;
-            color: #000000;
-            margin: 0.5rem;
-        }
-
-        .music-note {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            font-size: 2rem;
-            animation: float 3s linear infinite;
-            display: none;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translate(0, 0);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translate(-100px, -200px);
-                opacity: 0;
-            }
-        }
-
-        .github-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 16px;
-            height: 16px;
-            padding: 0.5rem;
-            background-color: #000000;
-            border: 2px solid #808080;
-            border-right-color: #FFFFFF;
-            border-bottom-color: #FFFFFF;
-            border-left-color: #808080;
-            border-top-color: #808080;
-            cursor: pointer;
-            margin: 0.5rem;
-            text-decoration: none;
-        }
-
-        .github-button:active {
-            border-right-color: #808080;
-            border-bottom-color: #808080;
-            border-left-color: #FFFFFF;
-            border-top-color: #FFFFFF;
-        }
-
-        .github-button svg {
-            width: 24px;
-            height: 24px;
-            stroke: #FFFFFF;
-            stroke-width: 2.5;
-        }
-
-        #me {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            font-weight: normal;
-            transition: font-size 0.3s ease;
-            cursor: url('./assets/images/el-gato.jpg'), auto;
-        }
-
-        #me:hover {
-            font-size: 4rem;
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
+      .rainbow-bg {
+        animation: rainbow 5s linear infinite alternate;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="navbar">
-        <a href="index.html" class="navbar-item">Home</a>
-        <a href="projects.html" class="navbar-item">Projects</a>
-        <a href="experiments.html" class="navbar-item">Experimentations!!!</a>
-        <a href="to-do.html" class="navbar-item">TO:DO</a>
+      <a href="index.html" class="navbar-item">Home</a>
+      <a href="projects.html" class="navbar-item">Projects</a>
+      <a href="experiments.html" class="navbar-item">Experimentations!!!</a>
+      <a href="to-do.html" class="navbar-item">TO:DO</a>
     </div>
     <div class="container">
-        <h1 id="me">0melette</h1>
-        <div class="greeting-box">
-            <p id="greetingPrompt">
-                who am i speaking to?
-                <input type="text" id="nameInput" style="padding: 0.5rem;">
-            </p>
-            <p id="greetingMessage"></p>
-        </div>
+      <h1 id="me">0melette</h1>
+      <div class="media-container" id="mediaContainer"></div>
+      <div class="greeting-box">
+        <p id="greetingPrompt">
+          who am i speaking to?
+          <input type="text" id="nameInput" style="padding: 0.5rem" />
+        </p>
+        <p id="greetingMessage"></p>
+      </div>
 
-        <div class="nav-buttons">
-            <a href="countdown/fish.html" class="nav-button">fish</a>
-            <a href="countdown/melbourne.html" class="nav-button">melbourne</a>
-            <a href="https://github.com/0melette" target="_blank" class="github-button">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <path
-                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                    </path>
-                </svg>
-            </a>
-        </div>
+      <div class="nav-buttons">
+        <a href="countdown/fish.html" class="nav-button">fish</a>
+        <a href="countdown/melbourne.html" class="nav-button">melbourne</a>
+        <a
+          href="https://github.com/0melette"
+          target="_blank"
+          class="github-button"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+            ></path>
+          </svg>
+        </a>
+      </div>
 
-        <div>
-            <button id="colorButton" class="action-button">Change Colour</button>
-            <input type="color" id="colorPicker" style="display: none;">
-            <select id="fontPicker" class="action-button">
-                <option value="" disabled selected>Change Font</option>
-                <option value="'Tahoma', 'Arial', sans-serif">Tahoma</option>
-                <option value="'Arial', sans-serif">Arial</option>
-                <option value="'Times New Roman', serif">Times New Roman</option>
-                <option value="'Courier New', monospace">Courier New</option>
-                <option value="'Verdana', sans-serif">Verdana</option>
-            </select>
-            <button id="randomButton" class="action-button">Random</button>
-            <button id="defaultButton" class="action-button">Return to Default</button>
-        </div>
+      <div>
+        <button id="colorButton" class="action-button">Change Colour</button>
+        <input type="color" id="colorPicker" style="display: none" />
+        <select id="fontPicker" class="action-button">
+          <option value="" disabled selected>Change Font</option>
+          <option value="'Tahoma', 'Arial', sans-serif">Tahoma</option>
+          <option value="'Arial', sans-serif">Arial</option>
+          <option value="'Times New Roman', serif">Times New Roman</option>
+          <option value="'Courier New', monospace">Courier New</option>
+          <option value="'Verdana', sans-serif">Verdana</option>
+        </select>
+        <button id="randomButton" class="action-button">Random</button>
+        <button id="defaultButton" class="action-button">
+          Return to Default
+        </button>
+      </div>
     </div>
 
-
     <div class="music-player">
-        <button id="playButton" class="action-button">Play Music</button>
+      <button id="playButton" class="action-button">Play Music</button>
     </div>
 
     <div id="musicNote" class="music-note">♪</div>
 
     <script>
-        let audio;
-        let musicPlaying = false;
-        let musicNoteInterval;
+      let audio;
+      let musicPlaying = false;
+      let musicNoteInterval;
+      let friends = {};
+      let aliases = {};
+      let activeSounds = [];
 
-        function initAudio() {
-            audio = new Audio('assets/audio/Kalimba.mp3');
-            audio.loop = true;
-        }
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("friends.json")
+          .then((response) => response.json())
+          .then((data) => {
+            friends = data;
 
-        function toggleMusic() {
-            if (!audio) {
-                initAudio();
-            }
-
-            if (audio.paused) {
-                audio.play();
-                musicPlaying = true;
-                document.getElementById('playButton').textContent = 'Pause Music';
-                startMusicNotes();
-            } else {
-                audio.pause();
-                musicPlaying = false;
-                document.getElementById('playButton').textContent = 'Play Music';
-                stopMusicNotes();
-            }
-        }
-
-        function random() {
-            const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
-            document.body.style.backgroundColor = randomColor;
-        }
-
-        function resetDefaults() {
-            document.body.style.backgroundColor = '#C0C0C0';
-            document.body.style.fontFamily = '"Tahoma", "Arial", sans-serif';
-        }
-
-        function startMusicNotes() {
-            const musicNote = document.getElementById('musicNote');
-            musicNote.style.display = 'block';
-            musicNoteInterval = setInterval(() => {
-                const noteClone = musicNote.cloneNode(true);
-                noteClone.style.left = Math.random() * window.innerWidth + 'px';
-                noteClone.style.top = window.innerHeight + 'px';
-                document.body.appendChild(noteClone);
-                setTimeout(() => {
-                    noteClone.remove();
-                }, 3000);  // Remove the note after 3 seconds
-            }, 500);
-        }
-
-        function stopMusicNotes() {
-            clearInterval(musicNoteInterval);
-            const notes = document.querySelectorAll('.music-note:not(#musicNote)');
-            notes.forEach(note => {
-                note.remove();
+            Object.keys(data).forEach((name) => {
+              if (data[name].alias) {
+                aliases[data[name].alias] = name;
+              }
             });
+          })
+          .catch((error) =>
+            console.error("Error fetching special names:", error)
+          );
+      });
+
+      function initAudio() {
+        audio = new Audio("assets/audio/Kalimba.mp3");
+        audio.loop = true;
+      }
+
+      function toggleMusic() {
+        if (!audio) {
+          initAudio();
         }
 
-        document.getElementById('playButton').addEventListener('click', (e) => {
-            e.preventDefault();
-            toggleMusic();
+        if (audio.paused) {
+          audio.play();
+          musicPlaying = true;
+          document.getElementById("playButton").textContent = "Pause Music";
+          startMusicNotes();
+        } else {
+          audio.pause();
+          musicPlaying = false;
+          document.getElementById("playButton").textContent = "Play Music";
+          stopMusicNotes();
+        }
+      }
+
+      function random() {
+        const randomColor =
+          "#" +
+          Math.floor(Math.random() * 16777215)
+            .toString(16)
+            .padStart(6, "0");
+        document.body.style.backgroundColor = randomColor;
+      }
+
+      function resetDefaults() {
+        document.body.style.backgroundColor = "#C0C0C0";
+        document.body.style.fontFamily = '"Tahoma", "Arial", sans-serif';
+        document.body.classList.remove("rainbow-bg"); // Remove rainbow background - not really good fix
+        activeSounds.forEach((sound) => {
+          sound.pause();
+          sound.currentTime = 0;
+        });
+        activeSounds = [];
+      }
+
+      function startMusicNotes() {
+        const musicNote = document.getElementById("musicNote");
+        musicNote.style.display = "block";
+        musicNoteInterval = setInterval(() => {
+          const noteClone = musicNote.cloneNode(true);
+          noteClone.style.left = Math.random() * window.innerWidth + "px";
+          noteClone.style.top = window.innerHeight + "px";
+          document.body.appendChild(noteClone);
+          setTimeout(() => {
+            noteClone.remove();
+          }, 3000); // Remove the note after 3 seconds
+        }, 500);
+      }
+
+      function stopMusicNotes() {
+        clearInterval(musicNoteInterval);
+        const notes = document.querySelectorAll(".music-note:not(#musicNote)");
+        notes.forEach((note) => {
+          note.remove();
+        });
+      }
+
+      document.getElementById("playButton").addEventListener("click", (e) => {
+        e.preventDefault();
+        toggleMusic();
+      });
+
+      document
+        .getElementById("nameInput")
+        .addEventListener("keypress", function (event) {
+          if (event.key === "Enter") {
+            greetUser();
+          }
         });
 
-        document.getElementById('nameInput').addEventListener('keypress', function (event) {
-            if (event.key === 'Enter') {
-                greetUser();
-            }
-        });
+      function greetUser() {
+        let nameInput = document
+          .getElementById("nameInput")
+          .value.trim()
+          .toLowerCase();
+        const greetingMessage = document.getElementById("greetingMessage");
+        greetingMessage.innerHTML = "";
+        document.getElementById("mediaContainer").innerHTML = "";
+        resetDefaults();
 
-        function greetUser() {
-            var nameInput = document.getElementById('nameInput');
-            var name = nameInput.value;
-            if (name) {
-                document.getElementById('greetingMessage').textContent = 'Hello, ' + name + '!';
-                document.getElementById('greetingPrompt').style.display = 'none';
-            }
+        if (!nameInput) {
+          greetingMessage.textContent = "oooh so mysterious!";
+          return;
         }
 
-        document.getElementById('colorButton').addEventListener('click', function () {
-            document.getElementById('colorPicker').click();
-        });
+        const normalizedAliases = Object.fromEntries(
+          Object.entries(aliases).map(([key, value]) => [
+            key.toLowerCase(),
+            value,
+          ])
+        );
+        const normalizedFriends = Object.fromEntries(
+          Object.entries(friends).map(([key, value]) => [
+            key.toLowerCase(),
+            value,
+          ])
+        );
 
-        document.getElementById('colorPicker').addEventListener('input', function () {
-            document.body.style.backgroundColor = this.value;
-        });
+        if (normalizedAliases[nameInput]) {
+          nameInput = normalizedAliases[nameInput];
+        }
 
-        document.getElementById('fontPicker').addEventListener('change', function () {
-            var selectedFont = this.value;
-            if (selectedFont) {
-                document.body.style.fontFamily = selectedFont;
+        if (normalizedFriends[nameInput]) {
+          const action = normalizedFriends[nameInput];
+          greetingMessage.textContent =
+            action.message || `Hello, ${nameInput}!`;
+
+          if (action.css) {
+            if (action.css.className) {
+              document.body.classList.add(action.css.className);
             }
+
+            Object.entries(action.css).forEach(([key, value]) => {
+              document.body.style[key] = value;
+            });
+          }
+
+          if (action.link) {
+            const linkButton = document.createElement("a");
+            linkButton.href = action.link;
+            linkButton.target = "_blank";
+            linkButton.className = "action-button";
+            linkButton.style.textDecoration = "none";
+            linkButton.textContent = "🔗";
+            greetingMessage.appendChild(linkButton);
+          }
+
+          if (action.sound) {
+            const sound = new Audio(action.sound);
+            sound.play();
+            activeSounds.push(sound);
+          }
+
+          if (action.image) {
+            const img = document.createElement("img");
+            img.src = action.image;
+            document.getElementById("mediaContainer").appendChild(img);
+          }
+
+          if (action.video) {
+            const video = document.createElement("video");
+            video.src = action.video;
+            video.width = 500;
+            video.autoplay = true;
+            video.controls = false;
+            document.getElementById("mediaContainer").appendChild(video);
+          }
+        } else {
+          greetingMessage.textContent = `Hello, ${nameInput}!`;
+        }
+      }
+
+      document
+        .getElementById("colorButton")
+        .addEventListener("click", function () {
+          document.getElementById("colorPicker").click();
         });
 
-        document.getElementById('randomButton').addEventListener('click', function () {
-            random();
+      document
+        .getElementById("colorPicker")
+        .addEventListener("input", function () {
+          document.body.style.backgroundColor = this.value;
         });
 
-        document.getElementById('defaultButton').addEventListener('click', function () {
-            resetDefaults();
+      document
+        .getElementById("fontPicker")
+        .addEventListener("change", function () {
+          var selectedFont = this.value;
+          if (selectedFont) {
+            document.body.style.fontFamily = selectedFont;
+          }
+        });
+
+      document
+        .getElementById("randomButton")
+        .addEventListener("click", function () {
+          random();
+        });
+
+      document
+        .getElementById("defaultButton")
+        .addEventListener("click", function () {
+          resetDefaults();
         });
     </script>
-</body>
-
+  </body>
 </html>
