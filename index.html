@@ -360,6 +360,10 @@
       let activeSounds = [];
 
       document.addEventListener("DOMContentLoaded", () => {
+        const savedColor = localStorage.getItem("backgroundColor");
+        if (savedColor) {
+          document.body.style.backgroundColor =savedColor;
+        }
         fetch("friends.json")
           .then((response) => response.json())
           .then((data) => {
@@ -546,6 +550,7 @@
         .getElementById("colorPicker")
         .addEventListener("input", function () {
           document.body.style.backgroundColor = this.value;
+          localStorage.setItem("backgroundColor", this.value)
         });
 
       document
