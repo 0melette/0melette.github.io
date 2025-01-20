@@ -5,7 +5,11 @@
             "fontFamily": "Comic Sans MS"
         },
         "message": "thats a nice name",
-        "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "marquee": {
+            "text": "blub blub blub!",
+            "gif": "assets/images/fish_swim.gif"
+        }
     },
     "yunus": {
         "alias": "yunz",

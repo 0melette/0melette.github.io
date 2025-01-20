@@ -352,6 +352,7 @@
       <a href="experiments.html" class="navbar-item">Experimentations!!!</a>
       <a href="to-do.html" class="navbar-item">TO:DO</a>
     </div>
+    <div id="marqueeContainer"></div>
     <div class="container">
       <h1 id="me">0melette</h1>
       <div class="media-container" id="mediaContainer"></div>
@@ -604,6 +605,8 @@
         const greetingMessage = document.getElementById("greetingMessage");
         greetingMessage.innerHTML = "";
         document.getElementById("mediaContainer").innerHTML = "";
+        const marqueeContainer = document.getElementById("marqueeContainer");
+        marqueeContainer.innerHTML = ""
         resetDefaults();
 
         if (!nameInput) {
@@ -672,6 +675,26 @@
             video.autoplay = true;
             video.controls = false;
             document.getElementById("mediaContainer").appendChild(video);
+          }
+
+          if (action.marquee) {
+            const marquee = document.createElement("marquee");
+            marquee.setAttribute("behavior", "scroll");
+            marquee.setAttribute("direction", "right");
+            marquee.style.display = "flex";
+            marquee.style.alignItems = "center";
+            if (action.marquee.gif) {
+              const gif = document.createElement("img");
+              gif.src = action.marquee.gif;
+              gif.style.height = "50px";
+              gif.style.marginRight = "10px";
+              marquee.appendChild(gif);
+            }
+            if (action.marquee.text) {
+              const text = document.createTextNode(action.marquee.text);
+              marquee.appendChild(text);
+            }
+            marqueeContainer.appendChild(marquee);
           }
         } else {
           greetingMessage.textContent = `Hello, ${nameInput}!`;
