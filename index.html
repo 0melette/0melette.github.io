@@ -1,63 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+  <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>✨ 0melette's Epic Corner ✨</title>
-    <style>
-      body {
-        background-color: #c0c0c0;
-        color: #000000;
+  <title>✨ 0melette's Epic Corner ✨</title>
+  <style>
+    body {
+      background-color: #c0c0c0;
+      color: #000000;
+      font-family: "Tahoma", "Arial", sans-serif;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      width: 100%;
+      background-color: #c0c0c0;
+      border-bottom: 2px solid #808080;
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      box-sizing: border-box;
+    }
+
+    .navbar-item {
+      margin-right: 1rem;
         font-family: "Tahoma", "Arial", sans-serif;
-        text-align: center;
-        padding: 0;
-        margin: 0;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
+      font-size: 1rem;
+      color: #000000;
+      cursor: pointer;
+      user-select: none;
+      padding: 0.5rem 1rem;
+      border: 2px solid #c0c0c0;
+      border-top-color: #ffffff;
+      border-left-color: #ffffff;
+      border-bottom-color: #808080;
+      border-right-color: #808080;
+      background-color: #c0c0c0;
+    }
 
-      .navbar {
-        width: 100%;
-        background-color: #c0c0c0;
-        border-bottom: 2px solid #808080;
-        display: flex;
-        align-items: center;
-        padding: 0 1rem;
-        box-sizing: border-box;
-      }
+    .navbar-item:active {
+      border-top-color: #808080;
+      border-left-color: #808080;
+      border-bottom-color: #ffffff;
+      border-right-color: #ffffff;
+    }
 
-      .navbar-item {
-        margin-right: 1rem;
-        font-family: "Tahoma", "Arial", sans-serif;
-        font-size: 1rem;
-        color: #000000;
-        cursor: pointer;
-        user-select: none;
-        padding: 0.5rem 1rem;
-        border: 2px solid #c0c0c0;
-        border-top-color: #ffffff;
-        border-left-color: #ffffff;
-        border-bottom-color: #808080;
-        border-right-color: #808080;
-        background-color: #c0c0c0;
-      }
-
-      .navbar-item:active {
-        border-top-color: #808080;
-        border-left-color: #808080;
-        border-bottom-color: #ffffff;
-        border-right-color: #ffffff;
-      }
-
-      .container {
-        padding: 2rem;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
+    .container {
+      padding: 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
 
       h1 {
         font-size: 2rem;
@@ -72,27 +72,27 @@
         margin: 1rem 0;
       }
 
-      .nav-button {
-        display: inline-block;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
+    .nav-button {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
         font-family: inherit;
-        background-color: #c0c0c0;
-        border: 2px solid #808080;
+      background-color: #c0c0c0;
+      border: 2px solid #808080;
         border-right-color: #ffffff;
         border-bottom-color: #ffffff;
-        border-left-color: #808080;
-        border-top-color: #808080;
-        text-decoration: none;
+      border-left-color: #808080;
+      border-top-color: #808080;
+      text-decoration: none;
         color: #000000;
-        cursor: pointer;
+      cursor: pointer;
         box-sizing: border-box;
-        margin: 0.5rem;
-      }
+      margin: 0.5rem;
+    }
 
-      .nav-button:active {
-        border-right-color: #808080;
-        border-bottom-color: #808080;
+    .nav-button:active {
+      border-right-color: #808080;
+      border-bottom-color: #808080;
         border-left-color: #ffffff;
         border-top-color: #ffffff;
       }
@@ -101,29 +101,29 @@
         position: fixed;
         bottom: 20px;
         right: 20px;
-      }
+    }
 
-      .action-button {
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-        background-color: #c0c0c0;
-        border: 2px solid #808080;
+    .action-button {
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #c0c0c0;
+      border: 2px solid #808080;
         border-right-color: #ffffff;
         border-bottom-color: #ffffff;
-        border-left-color: #808080;
-        border-top-color: #808080;
-        cursor: pointer;
+      border-left-color: #808080;
+      border-top-color: #808080;
+      cursor: pointer;
         font-family: inherit;
         color: #000000;
-        margin: 0.5rem;
-      }
+      margin: 0.5rem;
+    }
 
-      .action-button:active {
-        border-right-color: #808080;
-        border-bottom-color: #808080;
+    .action-button:active {
+      border-right-color: #808080;
+      border-bottom-color: #808080;
         border-left-color: #ffffff;
         border-top-color: #ffffff;
-      }
+    }
 
       #fontPicker {
         font-size: 1rem;
@@ -134,11 +134,11 @@
         border-bottom-color: #ffffff;
         border-left-color: #808080;
         border-top-color: #808080;
-        font-family: inherit;
+      font-family: inherit;
         color: #000000;
         cursor: pointer;
-        margin: 0.5rem;
-      }
+      margin: 0.5rem;
+    }
 
       #colorButton {
         font-size: 1rem;
@@ -153,75 +153,75 @@
         font-family: inherit;
         color: #000000;
         margin: 0.5rem;
+    }
+
+    .music-note {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 2rem;
+      animation: float 3s linear infinite;
+      display: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0);
+        opacity: 1;
       }
 
-      .music-note {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        font-size: 2rem;
-        animation: float 3s linear infinite;
-        display: none;
+      100% {
+        transform: translate(-100px, -200px);
+        opacity: 0;
       }
+    }
 
-      @keyframes float {
-        0% {
-          transform: translate(0, 0);
-          opacity: 1;
-        }
-
-        100% {
-          transform: translate(-100px, -200px);
-          opacity: 0;
-        }
-      }
-
-      .github-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 16px;
-        height: 16px;
-        padding: 0.5rem;
+    .github-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      padding: 0.5rem;
         background-color: #000000;
-        border: 2px solid #808080;
+      border: 2px solid #808080;
         border-right-color: #ffffff;
         border-bottom-color: #ffffff;
-        border-left-color: #808080;
-        border-top-color: #808080;
-        cursor: pointer;
-        margin: 0.5rem;
-        text-decoration: none;
-      }
+      border-left-color: #808080;
+      border-top-color: #808080;
+      cursor: pointer;
+      margin: 0.5rem;
+      text-decoration: none;
+    }
 
-      .github-button:active {
-        border-right-color: #808080;
-        border-bottom-color: #808080;
+    .github-button:active {
+      border-right-color: #808080;
+      border-bottom-color: #808080;
         border-left-color: #ffffff;
         border-top-color: #ffffff;
-      }
+    }
 
-      .github-button svg {
-        width: 24px;
-        height: 24px;
+    .github-button svg {
+      width: 24px;
+      height: 24px;
         stroke: #ffffff;
-        stroke-width: 2.5;
-      }
+      stroke-width: 2.5;
+    }
 
-      #me {
-        font-size: 2rem;
-        margin-bottom: 1rem;
+    #me {
+      font-size: 2rem;
+      margin-bottom: 1rem;
         font-weight: normal;
-        transition: font-size 0.3s ease;
+      transition: font-size 0.3s ease;
         cursor: url("./assets/images/el-gato.jpg"), auto;
-      }
+    }
 
-      #me:hover {
-        font-size: 4rem;
-        animation: spin 2s linear infinite;
-      }
+    #me:hover {
+      font-size: 4rem;
+      animation: spin 2s linear infinite;
+    }
 
-      @keyframes spin {
+    @keyframes spin {
         from {
           transform: rotate(0deg);
         }
@@ -229,7 +229,7 @@
         to {
           transform: rotate(360deg);
         }
-      }
+    }
 
       .media-container {
         display: flex;
@@ -237,26 +237,26 @@
         margin: 1rem 0;
       }
 
-      .media-container img,
-      .media-container video {
-        max-width: 150px;
-        background-color: #c0c0c0;
-        border: 2px solid #c0c0c0;
+    .media-container img,
+    .media-container video {
+      max-width: 150px;
+      background-color: #c0c0c0;
+      border: 2px solid #c0c0c0;
         border-top-color: #ffffff;
         border-left-color: #ffffff;
-        border-bottom-color: #808080;
-        border-right-color: #808080;
+      border-bottom-color: #808080;
+      border-right-color: #808080;
         box-sizing: border-box;
-        padding: 5px;
-        margin: 0 0.5rem;
-      }
+      padding: 5px;
+      margin: 0 0.5rem;
+    }
 
-      .media-container video {
+    .media-container video {
         max-width: none !important;
-        width: 500px !important;
-      }
+      width: 500px !important;
+    }
 
-      @keyframes rainbow {
+    @keyframes rainbow {
         0% {
           background-color: red;
         }
@@ -278,177 +278,307 @@
         100% {
           background-color: violet;
         }
-      }
+    }
 
-      .rainbow-bg {
-        animation: rainbow 5s linear infinite alternate;
-      }
-    </style>
+    .rainbow-bg {
+      animation: rainbow 5s linear infinite alternate;
+    }
+
+    #canvasContainer {
+      position: absolute;
+      right: 20px;
+      bottom: 80px;
+      width: 200px;
+      height: 200px; 
+      resize: both;
+      overflow: hidden;
+      border: 2px solid #808080;
+      background-color: #c0c0c0;
+      box-sizing: border-box;
+      cursor: move;
+    }
+    
+    #canvasTitleBar {
+      width: 100%;
+      height: 24px;
+      background: #808080;
+      cursor: move;
+      box-sizing: border-box;
+      padding: 2px;
+      color: white;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    #drawCanvas {
+      width: 100%;
+      height: calc(100% - 24px);
+      cursor: crosshair;
+      transform-style: preserve-3d;
+    }
+    #canvasContainer.transparent-bg {
+      border: none;
+      background: transparent;
+      resize: none;
+    }
+    #drawCanvas.transparent-bg {
+      background-color: transparent;
+    }
+
+    #drawCanvas.no-draw {
+      pointer-events: none;
+    }
+    @keyframes flipHorizontally {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+    #drawCanvas.flipping {
+      animation: flipHorizontally 2s linear infinite;
+    }
+  </style>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2224%22 font-size=%2232%22>🐟</text></svg>">
-  </head>
+</head>
 
-  <body>
-    <div class="navbar">
-      <a href="index.html" class="navbar-item">Home</a>
-      <a href="projects.html" class="navbar-item">Projects</a>
-      <a href="experiments.html" class="navbar-item">Experimentations!!!</a>
-      <a href="to-do.html" class="navbar-item">TO:DO</a>
+<body>
+  <div class="navbar">
+    <a href="index.html" class="navbar-item">Home</a>
+    <a href="projects.html" class="navbar-item">Projects</a>
+    <a href="experiments.html" class="navbar-item">Experimentations!!!</a>
+    <a href="to-do.html" class="navbar-item">TO:DO</a>
+  </div>
+  <div class="container">
+    <h1 id="me">0melette</h1>
+    <div class="media-container" id="mediaContainer"></div>
+    <div class="greeting-box">
+      <p id="greetingPrompt">
+        who am i speaking to?
+        <input type="text" id="nameInput" style="padding: 0.5rem" />
+      </p>
+      <p id="greetingMessage"></p>
     </div>
-    <div class="container">
-      <h1 id="me">0melette</h1>
-      <div class="media-container" id="mediaContainer"></div>
-      <div class="greeting-box">
-        <p id="greetingPrompt">
-          who am i speaking to?
-          <input type="text" id="nameInput" style="padding: 0.5rem" />
-        </p>
-        <p id="greetingMessage"></p>
-      </div>
 
-      <div class="nav-buttons">
-        <a href="countdown/fish.html" class="nav-button">fish</a>
-        <a href="countdown/melbourne.html" class="nav-button">melbourne</a>
-        <a
-          href="https://github.com/0melette"
-          target="_blank"
-          class="github-button"
+    <div class="nav-buttons">
+      <a href="countdown/fish.html" class="nav-button">fish</a>
+      <a href="countdown/melbourne.html" class="nav-button">melbourne</a>
+      <a
+        href="https://github.com/0melette"
+        target="_blank"
+        class="github-button"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path
+          <path
               d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-            ></path>
-          </svg>
-        </a>
-      </div>
+          ></path>
+        </svg>
+      </a>
+    </div>
 
-      <div>
-        <button id="colorButton" class="action-button">Change Colour</button>
-        <input type="color" id="colorPicker" style="display: none" />
-        <select id="fontPicker" class="action-button">
-          <option value="" disabled selected>Change Font</option>
-          <option value="'Tahoma', 'Arial', sans-serif">Tahoma</option>
-          <option value="'Arial', sans-serif">Arial</option>
-          <option value="'Times New Roman', serif">Times New Roman</option>
-          <option value="'Courier New', monospace">Courier New</option>
-          <option value="'Verdana', sans-serif">Verdana</option>
-        </select>
-        <button id="randomButton" class="action-button">Random</button>
+    <div>
+      <button id="colorButton" class="action-button">Change Colour</button>
+      <input type="color" id="colorPicker" style="display: none" />
+      <select id="fontPicker" class="action-button">
+        <option value="" disabled selected>Change Font</option>
+        <option value="'Tahoma', 'Arial', sans-serif">Tahoma</option>
+        <option value="'Arial', sans-serif">Arial</option>
+        <option value="'Times New Roman', serif">Times New Roman</option>
+        <option value="'Courier New', monospace">Courier New</option>
+        <option value="'Verdana', sans-serif">Verdana</option>
+      </select>
+      <button id="randomButton" class="action-button">Random</button>
         <button id="defaultButton" class="action-button">
           Return to Default
         </button>
-      </div>
     </div>
+  </div>
 
-    <div class="music-player">
-      <button id="playButton" class="action-button">Play Music</button>
-    </div>
+  <div id="canvasContainer">
+    <div id="canvasTitleBar">draw anything!</div>
+    <canvas id="drawCanvas" width="200" height="176"></canvas>
+  </div>
 
-    <div id="musicNote" class="music-note">♪</div>
+  <div class="music-player">
+    <button id="playButton" class="action-button">Play Music</button>
+  </div>
+  
+  <div id="musicNote" class="music-note">♪</div>
 
-    <script>
-      let audio;
-      let musicPlaying = false;
-      let musicNoteInterval;
-      let friends = {};
-      let aliases = {};
-      let activeSounds = [];
+  <script>
+    let audio;
+    let musicPlaying = false;
+    let musicNoteInterval;
+    let friends = {};
+    let aliases = {};
+    let activeSounds = [];
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const savedColor = localStorage.getItem("backgroundColor");
-        if (savedColor) {
+    let canDraw = true;
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    const canvas = document.getElementById("drawCanvas");
+    const canvasTitleBar = document.getElementById("canvasTitleBar");
+    const ctx = canvas.getContext("2d");
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "#000";
+
+    function draw(e) {
+      if (!isDrawing || !canDraw) return;
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    }
+    canvas.addEventListener("mousedown", (e) => {
+      if (!canDraw) return;
+      isDrawing = true;
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    });
+    canvas.addEventListener("mousemove", draw);
+    canvas.addEventListener("mouseup", () => (isDrawing = false));
+    canvas.addEventListener("mouseout", () => (isDrawing = false));
+
+    const container = document.getElementById("canvasContainer");
+    const titleBar = document.getElementById("canvasTitleBar");
+    let offsetX = 0, offsetY = 0;
+    let isDragging = false;
+
+    titleBar.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      offsetX = e.clientX - container.offsetLeft;
+      offsetY = e.clientY - container.offsetTop;
+    });
+    document.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      container.style.left = (e.clientX - offsetX) + "px";
+      container.style.top = (e.clientY - offsetY) + "px";
+    });
+    document.addEventListener("mouseup", () => (isDragging = false));
+
+    const resizeObserver = new ResizeObserver(() => {
+      const oldWidth = canvas.width;
+      const oldHeight = canvas.height;
+      const imageData = ctx.getImageData(0, 0, oldWidth, oldHeight);
+
+      const newWidth = container.clientWidth;
+      const newHeight = container.clientHeight - titleBar.offsetHeight;
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+
+      ctx.putImageData(imageData, 0, 0);
+
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = "#000";
+    });
+    resizeObserver.observe(container);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedColor = localStorage.getItem("backgroundColor");
+      if (savedColor) {
           document.body.style.backgroundColor =savedColor;
-        }
-        fetch("friends.json")
-          .then((response) => response.json())
-          .then((data) => {
-            friends = data;
+      }
+      fetch("friends.json")
+        .then((response) => response.json())
+        .then((data) => {
+          friends = data;
 
-            Object.keys(data).forEach((name) => {
-              if (data[name].alias) {
-                aliases[data[name].alias] = name;
-              }
-            });
-          })
+          Object.keys(data).forEach((name) => {
+            if (data[name].alias) {
+              aliases[data[name].alias] = name;
+            }
+          });
+        })
           .catch((error) =>
             console.error("Error fetching special names:", error)
           );
-      });
+    });
 
-      function initAudio() {
-        audio = new Audio("assets/audio/Kalimba.mp3");
-        audio.loop = true;
-      }
+    function initAudio() {
+      audio = new Audio("assets/audio/Kalimba.mp3");
+      audio.loop = true;
+    }
 
-      function toggleMusic() {
+    function toggleMusic() {
         if (!audio) {
           initAudio();
         }
 
-        if (audio.paused) {
-          audio.play();
-          musicPlaying = true;
-          document.getElementById("playButton").textContent = "Pause Music";
-          startMusicNotes();
-        } else {
-          audio.pause();
-          musicPlaying = false;
-          document.getElementById("playButton").textContent = "Play Music";
-          stopMusicNotes();
-        }
+      if (audio.paused) {
+        audio.play();
+        musicPlaying = true;
+        document.getElementById("playButton").textContent = "Pause Music";
+        startMusicNotes();
+        container.classList.add("transparent-bg");
+        canvas.classList.add("transparent-bg", "flipping", "no-draw");
+        canvasTitleBar.style.visibility = "hidden";
+        canDraw = false;
+      } else {
+        audio.pause();
+        musicPlaying = false;
+        document.getElementById("playButton").textContent = "Play Music";
+        stopMusicNotes();
+        container.classList.remove("transparent-bg");
+        canvas.classList.remove("transparent-bg", "flipping", "no-draw");
+        canvasTitleBar.style.visibility = "visible";
+        canDraw = true;
       }
+    }
+    
+    function random() {
+      const randomColor =
+        "#" +
+        Math.floor(Math.random() * 16777215)
+          .toString(16)
+          .padStart(6, "0");
+      document.body.style.backgroundColor = randomColor;
+    }
 
-      function random() {
-        const randomColor =
-          "#" +
-          Math.floor(Math.random() * 16777215)
-            .toString(16)
-            .padStart(6, "0");
-        document.body.style.backgroundColor = randomColor;
-      }
+    function resetDefaults() {
+      document.body.style.backgroundColor = "#C0C0C0";
+      document.body.style.fontFamily = '"Tahoma", "Arial", sans-serif';
+      document.body.classList.remove("rainbow-bg"); // Remove rainbow background - not really good fix
+      activeSounds.forEach((sound) => {
+        sound.pause();
+        sound.currentTime = 0;
+      });
+      activeSounds = [];
+    }
 
-      function resetDefaults() {
-        document.body.style.backgroundColor = "#C0C0C0";
-        document.body.style.fontFamily = '"Tahoma", "Arial", sans-serif';
-        document.body.classList.remove("rainbow-bg"); // Remove rainbow background - not really good fix
-        activeSounds.forEach((sound) => {
-          sound.pause();
-          sound.currentTime = 0;
-        });
-        activeSounds = [];
-      }
-
-      function startMusicNotes() {
-        const musicNote = document.getElementById("musicNote");
-        musicNote.style.display = "block";
-        musicNoteInterval = setInterval(() => {
-          const noteClone = musicNote.cloneNode(true);
-          noteClone.style.left = Math.random() * window.innerWidth + "px";
-          noteClone.style.top = window.innerHeight + "px";
-          document.body.appendChild(noteClone);
+    function startMusicNotes() {
+      const musicNote = document.getElementById("musicNote");
+      musicNote.style.display = "block";
+      musicNoteInterval = setInterval(() => {
+        const noteClone = musicNote.cloneNode(true);
+        noteClone.style.left = Math.random() * window.innerWidth + "px";
+        noteClone.style.top = window.innerHeight + "px";
+        document.body.appendChild(noteClone);
           setTimeout(() => {
             noteClone.remove();
           }, 3000); // Remove the note after 3 seconds
-        }, 500);
-      }
+      }, 500);
+    }
 
-      function stopMusicNotes() {
-        clearInterval(musicNoteInterval);
-        const notes = document.querySelectorAll(".music-note:not(#musicNote)");
+    function stopMusicNotes() {
+      clearInterval(musicNoteInterval);
+      const notes = document.querySelectorAll(".music-note:not(#musicNote)");
         notes.forEach((note) => {
           note.remove();
         });
-      }
+    }
 
-      document.getElementById("playButton").addEventListener("click", (e) => {
-        e.preventDefault();
-        toggleMusic();
-      });
+    document.getElementById("playButton").addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleMusic();
+    });
 
       document
         .getElementById("nameInput")
@@ -456,102 +586,102 @@
           if (event.key === "Enter") {
             greetUser();
           }
-        });
+    });
 
-      function greetUser() {
+    function greetUser() {
         let nameInput = document
           .getElementById("nameInput")
           .value.trim()
           .toLowerCase();
-        const greetingMessage = document.getElementById("greetingMessage");
-        greetingMessage.innerHTML = "";
-        document.getElementById("mediaContainer").innerHTML = "";
-        resetDefaults();
+      const greetingMessage = document.getElementById("greetingMessage");
+      greetingMessage.innerHTML = "";
+      document.getElementById("mediaContainer").innerHTML = "";
+      resetDefaults();
 
-        if (!nameInput) {
-          greetingMessage.textContent = "oooh so mysterious!";
-          return;
-        }
+      if (!nameInput) {
+        greetingMessage.textContent = "oooh so mysterious!";
+        return;
+      }
 
-        const normalizedAliases = Object.fromEntries(
+      const normalizedAliases = Object.fromEntries(
           Object.entries(aliases).map(([key, value]) => [
             key.toLowerCase(),
             value,
           ])
-        );
-        const normalizedFriends = Object.fromEntries(
+      );
+      const normalizedFriends = Object.fromEntries(
           Object.entries(friends).map(([key, value]) => [
             key.toLowerCase(),
             value,
           ])
-        );
+      );
 
-        if (normalizedAliases[nameInput]) {
-          nameInput = normalizedAliases[nameInput];
-        }
+      if (normalizedAliases[nameInput]) {
+        nameInput = normalizedAliases[nameInput];
+      }
 
-        if (normalizedFriends[nameInput]) {
-          const action = normalizedFriends[nameInput];
+      if (normalizedFriends[nameInput]) {
+        const action = normalizedFriends[nameInput];
           greetingMessage.textContent =
             action.message || `Hello, ${nameInput}!`;
 
-          if (action.css) {
-            if (action.css.className) {
-              document.body.classList.add(action.css.className);
-            }
+        if (action.css) {
+          if (action.css.className) {
+            document.body.classList.add(action.css.className);
+          }
 
             Object.entries(action.css).forEach(([key, value]) => {
               document.body.style[key] = value;
-            });
-          }
+          });
+        }
 
-          if (action.link) {
-            const linkButton = document.createElement("a");
-            linkButton.href = action.link;
-            linkButton.target = "_blank";
-            linkButton.className = "action-button";
-            linkButton.style.textDecoration = "none";
-            linkButton.textContent = "🔗";
-            greetingMessage.appendChild(linkButton);
-          }
+        if (action.link) {
+          const linkButton = document.createElement("a");
+          linkButton.href = action.link;
+          linkButton.target = "_blank";
+          linkButton.className = "action-button";
+          linkButton.style.textDecoration = "none";
+          linkButton.textContent = "🔗";
+          greetingMessage.appendChild(linkButton);
+        }
 
-          if (action.sound) {
-            const sound = new Audio(action.sound);
-            sound.play();
-            activeSounds.push(sound);
-          }
+        if (action.sound) {
+          const sound = new Audio(action.sound);
+          sound.play();
+          activeSounds.push(sound);
+        }
 
-          if (action.image) {
-            const img = document.createElement("img");
-            img.src = action.image;
-            document.getElementById("mediaContainer").appendChild(img);
-          }
+        if (action.image) {
+          const img = document.createElement("img");
+          img.src = action.image;
+          document.getElementById("mediaContainer").appendChild(img);
+        }
 
-          if (action.video) {
+        if (action.video) {
             const video = document.createElement("video");
             video.src = action.video;
             video.width = 500;
             video.autoplay = true;
             video.controls = false;
             document.getElementById("mediaContainer").appendChild(video);
-          }
-        } else {
-          greetingMessage.textContent = `Hello, ${nameInput}!`;
         }
+      } else {
+        greetingMessage.textContent = `Hello, ${nameInput}!`;
       }
+    }
 
       document
         .getElementById("colorButton")
         .addEventListener("click", function () {
-          document.getElementById("colorPicker").click();
-        });
+      document.getElementById("colorPicker").click();
+    });
 
       document
         .getElementById("colorPicker")
         .addEventListener("input", function () {
-          document.body.style.backgroundColor = this.value;
+      document.body.style.backgroundColor = this.value;
           localStorage.setItem("backgroundColor", this.value)
-        });
+    });
 
       document
         .getElementById("fontPicker")
@@ -559,8 +689,8 @@
           var selectedFont = this.value;
           if (selectedFont) {
             document.body.style.fontFamily = selectedFont;
-          }
-        });
+      }
+    });
 
       document
         .getElementById("randomButton")
@@ -573,6 +703,6 @@
         .addEventListener("click", function () {
           resetDefaults();
         });
-    </script>
-  </body>
+  </script>
+</body>
 </html>
