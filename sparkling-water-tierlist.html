@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WTG Sparkling Water Tier List </title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .tier-container {
+            margin: 10px;
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .tier {
+            display: flex;
+            margin-bottom: 10px;
+            min-height: 100px;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        .tier-label {
+            width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            color: white;
+        }
+
+        .tier-items {
+            flex-grow: 1;
+            padding: 10px;
+            min-height: 100px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            border: 2px #ccc;
+        }
+
+        .item {
+            width: 100px;
+            height: 100px;
+            cursor: move;
+            transition: transform 0.2s;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .item:hover {
+            transform: scale(1.05);
+        }
+
+        .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #item-pool {
+            border: 2px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: #3c3c3c;
+            border-radius: 10px;
+        }
+
+        .s-tier {
+            background-color: #ff7f7f;
+        }
+
+        .a-tier {
+            background-color: #ffbf7f;
+        }
+
+        .b-tier {
+            background-color: #ffff7f;
+        }
+
+        .c-tier {
+            background-color: #7fff7f;
+        }
+
+        .d-tier {
+            background-color: #7f7fff;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .export-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px;
+        }
+
+        #voice-select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        #titleInput {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+    </style>
+
+</head>
+<div class="navbar">
+    <a href="index.html" class="navbar-item">Home</a>
+    <a href="projects.html" class="navbar-item">Projects</a>
+    <a href="experiments.html" class="navbar-item">Experimentations!!!</a>
+    <a href="to-do.html" class="navbar-item">TO:DO</a>
+</div>
+
+<body>
+    <div id="fullTierList">
+        <div class="tier-container" id="tierList">
+            <h2 id="tierListTitle" style="color: white; text-align: center">Sparkling Water Tier List</h2>
+            <div class="tier">
+                <div class="tier-label s-tier">S</div>
+                <div class="tier-items" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            </div>
+            <div class="tier">
+                <div class="tier-label a-tier">A</div>
+                <div class="tier-items" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            </div>
+            <div class="tier">
+                <div class="tier-label b-tier">B</div>
+                <div class="tier-items" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            </div>
+            <div class="tier">
+                <div class="tier-label c-tier">C</div>
+                <div class="tier-items" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            </div>
+            <div class="tier">
+                <div class="tier-label d-tier">D</div>
+                <div class="tier-items" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            </div>
+        </div>
+
+        <div class="tier-container" id="fullTierList">
+            <div id="tierList">
+            </div>
+
+            <div class="pool-section">
+                <div class="tier-label pool-label">Pool</div>
+                <div id="item-pool" ondrop="drop(event)" ondragover="allowDrop(event)">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="export-controls">
+        <button onclick="exportTierList()">Export as Image</button>
+
+        <input type="text" id="titleInput" placeholder="Enter your name">
+        <select id="voice-select"></select>
+
+    </div>
+
+    <style>
+        .pool-section {
+            display: flex;
+            align-items: stretch;
+            margin-top: 20px;
+        }
+
+        .pool-label {
+            background-color: #4c4c4c;
+            border-radius: 5px 0 0 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #item-pool {
+            flex-grow: 1;
+            border: 2px solid #ccc;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: #3c3c3c;
+            border-radius: 0 5px 5px 0;
+            min-height: 100px;
+        }
+
+        #voice-select {
+            margin: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: white;
+            font-size: 14px;
+        }
+    </style>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        const flavors = ["Raspberry", "Mango", "Pineapple", "Lime", "Passionfruit", "Watermelon"];
+
+        const items = flavors.map(flavor => ({
+            name: flavor,
+            src: `./assets/images/sparkling-water/${flavor}.png`
+        }));
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.closest('.item').id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            const data = ev.dataTransfer.getData("text");
+            const draggedElement = document.getElementById(data);
+
+            const dropTarget = ev.target.closest('.tier-items') || ev.target.closest('#item-pool');
+
+            if (dropTarget) {
+                dropTarget.appendChild(draggedElement);
+            }
+        }
+
+        window.onload = function () {
+            const itemPool = document.getElementById("item-pool");
+            items.forEach((item, index) => {
+                const itemDiv = document.createElement("div");
+                itemDiv.className = "item";
+                itemDiv.draggable = true;
+                itemDiv.id = `item-${index}`;
+                itemDiv.ondragstart = drag;
+
+                itemDiv.addEventListener('click', function () {
+                    const utterance = new SpeechSynthesisUtterance(`${item.name} Sparkling Water`);
+                    const voiceSelect = document.getElementById('voice-select');
+                    if (voiceSelect) {
+                        const voices = window.speechSynthesis.getVoices();
+                        utterance.voice = voices[voiceSelect.value];
+                    }
+                    window.speechSynthesis.speak(utterance);
+                });
+
+                const imgElement = document.createElement("img");
+                imgElement.src = item.src;
+                imgElement.alt = `${item.name} Sparkling Water`;
+                imgElement.draggable = false;
+                itemDiv.title = `${item.name} Sparkling Water`;
+
+                itemDiv.appendChild(imgElement);
+                itemPool.appendChild(itemDiv);
+            });
+        };
+
+        document.getElementById('titleInput').addEventListener('input', function () {
+            const title = document.getElementById('tierListTitle');
+            title.textContent = this.value ?
+                `${this.value}'s Sparkling Water Tier List` :
+                "Sparkling Water Tier List";
+        });
+
+
+        function exportTierList() {
+            const tierList = document.getElementById("fullTierList");
+            const titleInput = document.getElementById("titleInput");
+
+            html2canvas(tierList, {
+                backgroundColor: "#2c2c2c",
+                scale: 2,
+            }).then((canvas) => {
+                const link = document.createElement("a");
+                const filename = titleInput.value ?
+                    `${titleInput.value}'s-tier-list.png` :
+                    "tier-list.png";
+                link.download = filename;
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+        function populateVoiceList() {
+            const voices = window.speechSynthesis.getVoices();
+            const voiceSelect = document.getElementById('voice-select');
+
+            voices.forEach((voice, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = `${voice.name} (${voice.lang})`;
+                voiceSelect.appendChild(option);
+            });
+        }
+
+        window.speechSynthesis.onvoiceschanged = populateVoiceList;
+    </script>
+</body>
+
+</html>
