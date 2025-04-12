@@ -488,10 +488,8 @@
 
       function stopMusicNotes() {
         clearInterval(musicNoteInterval);
-        const notes = document.querySelectorAll(".music-note:not(#musicNote)");
-        notes.forEach((note) => {
-          note.remove();
-        });
+        const musicNote = document.getElementById("musicNote");
+        musicNote.style.display = "none";
       }
 
       document.getElementById("playButton").addEventListener("click", (e) => {
