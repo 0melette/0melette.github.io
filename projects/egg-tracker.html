@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Egg Tracker</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2224%22 font-size=%2232%22>🥚</text></svg>"
+    />
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="../index.html" class="navbar-item">Home</a>
+      <a href="../projects.html" class="navbar-item">Projects</a>
+      <a href="../experiments.html" class="navbar-item">Experimentations!!!</a>
+      <a href="../to-do.html" class="navbar-item">TO:DO</a>
+    </div>
+    <main>
+      <h1>Egg Tracker</h1>
+      <div class="container">
+        <p>
+          two peck's egg tracker - built using react <br />
+          uses google sheets as a db 😭
+        </p>
+        <p>
+          <img
+            class="project-image"
+            src="../assets/images/egg-tracker.png"
+            alt="egg-tracker"
+          />
+        </p>
+        <p>
+          Live @
+          <a href="https://egg-tracker.vercel.app/">
+            https://egg-tracker.vercel.app/
+          </a>
+        </p>
+      </div>
+    </main>
+    <audio
+      id="cluck-sound"
+      src="https://www.myinstants.com/media/sounds/chicken_4Iiw4qR.mp3"
+      preload="auto"
+    ></audio>
+    <script>
+      document
+        .querySelector('a[href="https://egg-tracker.vercel.app/"]')
+        .addEventListener("click", () => {
+          document.getElementById("cluck-sound").play();
+        });
+    </script>
+  </body>
+</html>
