@@ -20,5 +20,13 @@
         <p>motion - a mobile experience</p>
         <a href="experiments/motion/index.html" class="navbar-item">Motion</a>
     </main>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const savedColor = localStorage.getItem('backgroundColor');
+        if (savedColor) {
+          document.body.style.backgroundColor = savedColor;
+        }
+      });
+    </script>
 </body>
 </html>
