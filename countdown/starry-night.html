@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>✨ see the stars </title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+      body {
+        background-color: #1b1b29;
+        color: #000000;
+        font-family: "Tahoma", "Arial", sans-serif;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      h1 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        color: white;
+      }
+      #timer {
+        font-size: 3rem;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 2px solid #ffffff;
+        margin-bottom: 2rem;
+        color: #000000;
+        border-radius: 5px;
+      }
+      
+      .music-button {
+        padding: 0;
+        width: 60px;
+        height: 48px;
+        background-color: #333;
+        color: #fff;
+        border: 1px solid #fff;
+        border-radius: 0;
+        font-size: 2rem;
+        font-family: inherit;
+        transition: background 0.3s, transform 0.3s;
+        cursor: pointer;
+        box-shadow: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 55%;
+        top: 56%;
+        transform: translateX(180px) translateY(-50%);
+      }
+      .music-button:active {
+        background-color: #444;
+      }
+      .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background-color: white;
+        opacity: var(--opacity);
+        border-radius: 50%;
+        animation: twinkle var(--twinkle-duration) ease-in-out infinite;
+      }
+      @keyframes twinkle {
+        0%, 100% {
+          opacity: var(--opacity);
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.5);
+        }
+      }
+    </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2224%22 font-size=%2232%22>✨</text></svg>">
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="../index.html" class="navbar-item">Home</a>
+      <a href="../projects.html" class="navbar-item">Projects</a>
+      <a href="../experiments.html" class="navbar-item">Experimentations!!!</a>
+      <a href="../to-do.html" class="navbar-item">TO:DO</a>
+    </div>
+<main>
+   <h1>✨ see the stars </h1>
+      <div id="timer">Loading...</div>
+      <button id="music-btn" class="music-button" title="Play Music">♫</button>
+      <div id="stars-container"></div>
+    </main>
+
+    <script>
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes meteor {
+          0% {
+            transform: translateX(0) translateY(0) rotate(45deg);
+            opacity: 1;
+          }
+          20% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(-250px) translateY(250px) rotate(45deg);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+
+      function createMeteor() {
+        const meteor = document.createElement('div');
+        meteor.style.position = 'absolute';
+        meteor.style.width = '2px';
+        meteor.style.height = '50px';
+        meteor.style.backgroundColor = 'white';
+        meteor.style.top = `${Math.random() * 50}%`;
+        meteor.style.left = `${Math.random() * 100}%`;
+        meteor.style.transform = 'rotate(45deg)';
+        meteor.style.opacity = '0';
+        meteor.style.boxShadow = '0 0 10px white';
+        meteor.style.animation = 'meteor 2s linear forwards';
+        
+        document.body.appendChild(meteor);
+        
+        setTimeout(() => {
+          meteor.remove();
+        }, 2000);
+        
+        return meteor;
+      }
+      
+      function createMeteors(count, delay) {
+        for (let i = 0; i < count; i++) {
+          setTimeout(() => createMeteor(), i * delay);
+        }
+      }
+
+      function createStars(count) {
+        const container = document.getElementById('stars-container');
+        
+        for (let i = 0; i < count; i++) {
+          const star = document.createElement('div');
+          star.className = 'star';
+          
+          star.style.left = `${Math.random() * 100}%`;
+          star.style.top = `${Math.random() * 100}%`;
+          
+          const size = Math.random() * 3 + 1;
+          star.style.width = `${size}px`;
+          star.style.height = `${size}px`;
+          
+          const opacity = Math.random() * 0.5 + 0.3;
+          star.style.setProperty('--opacity', opacity);
+          star.style.setProperty('--twinkle-duration', `${Math.random() * 4 + 2}s`);
+          
+          container.appendChild(star);
+        }
+      }
+
+      function createMeteorShower() {
+        createMeteors(20, 300);
+      }
+      
+      const countdownDate = new Date("June 7, 2025 00:00:00").getTime();
+      const timerInterval = setInterval(function () {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        document.getElementById("timer").innerHTML =
+          days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+        if (distance < 0) {
+          clearInterval(timerInterval);
+          document.getElementById("timer").innerHTML = "THE NIGHT HAS COME! ✨";
+          createMeteorShower();
+        }
+      }, 1000);
+
+      createStars(200);
+      
+      document.getElementById('timer').addEventListener('click', () => {
+        createMeteor();
+      });
+      
+      let audio;
+      let meteorInterval;
+      document.getElementById('music-btn').addEventListener('click', function() {
+        if (!audio) {
+          audio = new Audio('https://www.myinstants.com/media/sounds/airplanes-in-night-sky-are-like-shooting-stars.mp3');
+          audio.loop = false;
+        }
+        
+        audio.currentTime = 0;
+        audio.play();
+        
+        if (meteorInterval) clearInterval(meteorInterval);
+        
+        meteorInterval = setInterval(() => createMeteor(), 300);
+        
+        audio.onended = () => {
+          clearInterval(meteorInterval);
+        };
+      });
+    </script>
+  </body>
+</html>
