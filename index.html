@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ball.css">
     <title>✨ 0melette's Epic Corner ✨</title>
     <style>
 
@@ -256,6 +257,14 @@
   </head>
 
   <body>
+    <canvas id="ballCanvas"></canvas>
+    
+    <div id="ballControls" class="ball-controls" style="display: none;">
+      <button id="ballMinus" class="ball-control-button">-</button>
+      <span id="ballCounter" class="ball-counter-display">0</span>
+      <button id="ballPlus" class="ball-control-button">+</button>
+    </div>
+    
     <div class="navbar">
       <a href="index.html" class="navbar-item">Home</a>
       <a href="projects.html" class="navbar-item">Projects</a>
@@ -279,6 +288,7 @@
         <a href="countdown/melbourne.html" class="nav-button">melbourne</a>
         <a href="countdown/starry-night.html" class="nav-button">starry night</a>
         <a href="sparkling-water-tierlist.html" class="nav-button">sparkling water</a>
+        <button id="ballsButton" class="nav-button" data-active="false">balls</button>
         <a
           href="https://github.com/0melette"
           target="_blank"
@@ -644,5 +654,6 @@
           resetDefaults();
         });
     </script>
+    <script src="ball.js"></script>
   </body>
 </html>
