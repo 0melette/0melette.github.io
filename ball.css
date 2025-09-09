@@ -1,0 +1,90 @@
+/* Ball Playground Styles */
+#ballCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+#ballCanvas.interactive {
+  pointer-events: auto;
+  z-index: 15;
+}
+
+.ball-spawn-button {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  background-color: #c0c0c0;
+  border: 2px solid #808080;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
+  border-left-color: #808080;
+  border-top-color: #808080;
+  cursor: pointer;
+  font-family: inherit;
+  color: #000000;
+  z-index: 50;
+}
+
+.ball-spawn-button:active {
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  border-left-color: #ffffff;
+  border-top-color: #ffffff;
+}
+
+.ball-controls {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 50;
+}
+
+.ball-control-button {
+  width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0;
+  background-color: #c0c0c0;
+  border: 2px solid #808080;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
+  border-left-color: #808080;
+  border-top-color: #808080;
+  cursor: pointer;
+  font-family: inherit;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ball-control-button:active {
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  border-left-color: #ffffff;
+  border-top-color: #ffffff;
+}
+
+.ball-counter-display {
+  min-width: 30px;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.4rem;
+  background-color: #c0c0c0;
+  border: 2px solid #808080;
+  border-left-color: #ffffff;
+  border-top-color: #ffffff;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  font-family: inherit;
+  color: #000000;
+}

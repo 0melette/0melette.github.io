@@ -94,6 +94,14 @@ h1 {
   border-top-color: #ffffff;
 }
 
+.nav-button[data-active="true"] {
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  border-left-color: #ffffff;
+  border-top-color: #ffffff;
+  background-color: #a0a0a0;
+}
+
 .projects-wrapper {
   display: flex;
   flex-wrap: wrap;
