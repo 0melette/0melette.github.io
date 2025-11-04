@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>amy-tracker 🐋</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2224%22 font-size=%2232%22>🐋</text></svg>">
+  <style>
+    body {
+      background: linear-gradient(to bottom, #1e3a5f 0%, #2e5984 50%, #3d7ea8 100%);
+      min-height: 100vh;
+      color: #ffffff;
+    }
+
+
+    .ocean-floor {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      background: #1a2f4a;
+      border-top: 3px solid #2a4f6a;
+      z-index: 1;
+    }
+
+
+    .bubbles {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -50px;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
+      border-radius: 50%;
+      animation: rise linear infinite;
+    }
+
+    @keyframes rise {
+      to {
+        bottom: 100vh;
+        opacity: 0;
+      }
+    }
+
+    .stats-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      position: relative;
+      z-index: 3;
+    }
+
+    .view-container {
+      background-color: rgba(26, 47, 74, 0.8);
+      border: 2px solid #5a8fb8;
+      border-radius: 8px;
+      padding: 2rem;
+      height: 600px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .view {
+      display: none;
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    .view.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .view-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .view-title {
+      color: #8ab4d5;
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    .timer-view {
+      text-align: center;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+    }
+
+    .timer-display {
+      font-size: 5rem;
+      color: #8ab4d5;
+      font-weight: bold;
+      margin: 1.5rem 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .timer-status {
+      font-size: 1.5rem;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .timer-status.away {
+      color: #ff6b6b;
+    }
+
+    .away-info {
+      color: #ff8787;
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    .wailord-gif {
+      max-width: 500px;
+      max-height: 300px;
+      margin: 1rem auto;
+      display: block;
+      position: relative;
+      animation: emerge 2s ease-out;
+      filter: drop-shadow(0 0 20px rgba(138, 180, 213, 0.8));
+    }
+
+    @keyframes emerge {
+      0% {
+        transform: translateY(100px);
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .locked-in-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 1rem 0;
+    }
+
+    .lock-symbol {
+      font-size: 2.5rem;
+      color: #ffd700;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+      animation: lockPulse 2s infinite ease-in-out;
+      margin-bottom: 0.5rem;
+    }
+
+    @keyframes lockPulse {
+      0%, 100% {
+        transform: scale(1);
+        filter: brightness(1);
+      }
+      50% {
+        transform: scale(1.1);
+        filter: brightness(1.3);
+      }
+    }
+
+    .locked-in-text {
+      font-size: 1.5rem;
+      color: #8ab4d5;
+      text-shadow: 0 0 8px rgba(138, 180, 213, 0.6);
+      font-weight: bold;
+      letter-spacing: 2px;
+      animation: textGlow 3s infinite ease-in-out;
+    }
+
+    @keyframes textGlow {
+      0%, 100% {
+        text-shadow: 0 0 8px rgba(138, 180, 213, 0.6);
+      }
+      50% {
+        text-shadow: 0 0 15px rgba(138, 180, 213, 1);
+      }
+    }
+
+    .stat-card {
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 2px solid #5a8fb8;
+      border-top-color: #8ab4d5;
+      border-left-color: #8ab4d5;
+      border-bottom-color: #3a6f98;
+      border-right-color: #3a6f98;
+      padding: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-title {
+      font-size: 0.9rem;
+      color: #2e5984;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1e3a5f;
+    }
+
+    .stat-subtitle {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+
+    .refresh-button {
+      background: linear-gradient(to bottom, #5a8fb8, #3a6f98);
+      border: 2px solid #5a8fb8;
+      border-top-color: #8ab4d5;
+      border-left-color: #8ab4d5;
+      border-bottom-color: #2a4f78;
+      border-right-color: #2a4f78;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-family: inherit;
+      margin-top: 1rem;
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    .refresh-button:active {
+      border-top-color: #2a4f78;
+      border-left-color: #2a4f78;
+      border-bottom-color: #8ab4d5;
+      border-right-color: #8ab4d5;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: #8ab4d5;
+      font-size: 1.2rem;
+    }
+
+    #chartsView.active {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .chart-wrapper {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 0.5rem;
+      border-radius: 8px;
+      flex: 1 1 0;
+      min-width: 0;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .chart-wrapper h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+      color: #2e5984;
+      text-align: center;
+    }
+
+    .chart-wrapper iframe {
+      width: 420px;
+      height: 280px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+    }
+    .nav-arrow {
+      background: linear-gradient(to bottom, #5a8fb8, #3a6f98);
+      border: 2px solid #5a8fb8;
+      border-top-color: #8ab4d5;
+      border-left-color: #8ab4d5;
+      border-bottom-color: #2a4f78;
+      border-right-color: #2a4f78;
+      color: #ffffff;
+      font-size: 2rem;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+
+    .nav-arrow:active {
+      border-top-color: #2a4f78;
+      border-left-color: #2a4f78;
+      border-bottom-color: #8ab4d5;
+      border-right-color: #8ab4d5;
+    }
+
+    .nav-arrow:hover:not(:disabled) {
+      background: linear-gradient(to bottom, #6a9fc8, #4a7fa8);
+    }
+
+    .nav-arrow:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .sessions-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .sessions-stats .stat-card {
+      text-align: center;
+    }
+
+    .seaweed-container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      flex-grow: 1;
+      padding: 1rem;
+      background-color: rgba(26, 47, 74, 0.4);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .seaweed {
+      position: relative;
+      width: 40px;
+      cursor: pointer;
+      transform-origin: bottom center;
+      animation: sway 3s ease-in-out infinite;
+      transition: transform 0.3s ease;
+    }
+
+    .seaweed:nth-child(2n) {
+      animation-delay: -0.5s;
+    }
+
+    .seaweed:nth-child(3n) {
+      animation-delay: -1s;
+    }
+
+    .seaweed:nth-child(4n) {
+      animation-delay: -1.5s;
+    }
+
+    @keyframes sway {
+      0%, 100% {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(3deg);
+      }
+      75% {
+        transform: rotate(-3deg);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.7;
+      }
+    }
+
+    .seaweed:hover {
+      transform: scale(1.1);
+      filter: brightness(1.2);
+    }
+
+    .seaweed-strand {
+      background: linear-gradient(to top, #2d5016, #3a6b1f, #4a8528);
+      border-radius: 20px 20px 0 0;
+      position: relative;
+    }
+
+    .seaweed-tooltip {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 0.75rem;
+      border-radius: 8px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      z-index: 10;
+    }
+
+    .seaweed-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .seaweed:hover .seaweed-tooltip {
+      opacity: 1;
+    }
+
+    .no-sessions {
+      text-align: center;
+      color: #8ab4d5;
+      padding: 2rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="bubbles" id="bubbles"></div>
+  <div class="ocean-floor"></div>
+
+  <div class="navbar">
+    <a href="index.html" class="navbar-item">Home</a>
+    <a href="projects.html" class="navbar-item">Projects</a>
+    <a href="experiments.html" class="navbar-item">Experimentations!!!</a>
+    <a href="to-do.html" class="navbar-item">TO:DO</a>
+  </div>
+  <main>
+    <h1 style="color: #8ab4d5; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-size: 3.5rem;">where is amy? 🐋</h1>
+
+    <div class="stats-container">
+      <div id="loadingIndicator" class="loading">Loading data...</div>
+
+      <div id="mainContent" style="display: none;">
+        <div class="view-container">
+          <div class="view-navigation">
+            <button class="nav-arrow" id="prevView" onclick="navigateView(-1)">←</button>
+            <div class="view-title" id="currentViewTitle">🕐 Timer 🕐</div>
+            <button class="nav-arrow" id="nextView" onclick="navigateView(1)">→</button>
+          </div>
+
+          <!-- View 1: Timer -->
+          <div id="timerView" class="view active">
+            <div class="timer-view">
+              <div class="timer-status" id="timerStatus">Away</div>
+              <div class="timer-display" id="timerDisplay">00:00</div>
+              <div class="away-info" id="awayInfo" style="display: none;"></div>
+              <div class="locked-in-container" id="lockedInContainer" style="display: none;">
+                <div class="lock-symbol">🔒</div>
+                <div class="locked-in-text">Locked in</div>
+              </div>
+              <img id="wailordGif" class="wailord-gif" style="display: none;" src="./assets/images/wailord-munch.gif" alt="Locked in">
+              <div class="stat-subtitle" style="color: #8ab4d5; font-size: 1.1rem;" id="lastUpdated">Last updated: --</div>
+            </div>
+          </div>
+
+          <!-- View 2: Sessions -->
+          <div id="sessionsView" class="view">
+            <div class="sessions-stats">
+              <div class="stat-card">
+                <div class="stat-title">Sessions Today</div>
+                <div class="stat-value" id="sessionCount">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-title">Average Session</div>
+                <div class="stat-value" id="averageSession">--</div>
+              </div>
+            </div>
+            <div class="seaweed-container" id="seaweedContainer">
+              <div class="no-sessions">No sessions yet today...</div>
+            </div>
+          </div>
+
+          <!-- View 3: Charts -->
+          <div id="chartsView" class="view">
+            <div class="chart-wrapper">
+              <h3>Field 1 - Presence Detection</h3>
+              <iframe src="https://thingspeak.com/channels/3145004/charts/1?bgcolor=%23ffffff&color=%234a8528&dynamic=true&results=60&type=line&api_key=1GTN9W4ZWXJRDPZO"></iframe>
+            </div>
+            <div class="chart-wrapper">
+              <h3>Field 2 - Presence Duration (seconds)</h3>
+              <iframe src="https://thingspeak.com/channels/3145004/charts/2?bgcolor=%23ffffff&color=%234a8528&dynamic=true&results=60&type=line&api_key=1GTN9W4ZWXJRDPZO"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <button class="refresh-button" onclick="fetchDeskData()" style="margin-top: 1rem;">Refresh Data</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let currentView = 0;
+    const views = ['timerView', 'sessionsView', 'chartsView'];
+    const viewTitles = ['🕐 Timer 🕐', '🌿 Sessions 🌿', '📊 Charts 📊'];
+
+    document.addEventListener('DOMContentLoaded', function() {
+      createBubbles();
+      fetchDeskData();
+      // Auto-refresh every 1 second for timer
+      setInterval(fetchDeskData, 1000);
+
+      // Keyboard navigation
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+          navigateView(-1);
+        } else if (e.key === 'ArrowRight') {
+          navigateView(1);
+        }
+      });
+    });
+
+    function createBubbles() {
+      const bubblesContainer = document.getElementById('bubbles');
+      for (let i = 0; i < 15; i++) {
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        const size = Math.random() * 20 + 10;
+        bubble.style.width = size + 'px';
+        bubble.style.height = size + 'px';
+        bubble.style.left = Math.random() * 100 + '%';
+        bubble.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        bubble.style.animationDelay = Math.random() * 5 + 's';
+        bubblesContainer.appendChild(bubble);
+      }
+    }
+
+    function navigateView(direction) {
+      // Remove active class from current view
+      document.getElementById(views[currentView]).classList.remove('active');
+
+      // Update current view index
+      currentView += direction;
+      if (currentView < 0) currentView = views.length - 1;
+      if (currentView >= views.length) currentView = 0;
+
+      // Add active class to new view
+      document.getElementById(views[currentView]).classList.add('active');
+
+      // Update title
+      document.getElementById('currentViewTitle').textContent = viewTitles[currentView];
+
+      // Update arrow button states
+      document.getElementById('prevView').disabled = false;
+      document.getElementById('nextView').disabled = false;
+    }
+
+    function formatDuration(seconds) {
+      const hours = Math.floor(seconds / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      const secs = seconds % 60;
+
+      if (hours > 0) {
+        return `${hours}h ${minutes}m`;
+      } else if (minutes > 0) {
+        return `${minutes}m ${secs}s`;
+      } else {
+        return `${secs}s`;
+      }
+    }
+
+    function createSeaweedGarden(sessions) {
+      const container = document.getElementById('seaweedContainer');
+
+      if (sessions.length === 0) {
+        container.innerHTML = '<div class="no-sessions">No sessions yet today...</div>';
+        return;
+      }
+
+      container.innerHTML = '';
+
+      sessions.forEach((session, index) => {
+        const seaweed = document.createElement('div');
+        seaweed.className = 'seaweed';
+
+        // Calculate height based on duration (min 50px, max 200px)
+        const maxDuration = Math.max(...sessions.map(s => s.duration));
+        const height = Math.min(200, Math.max(50, (session.duration / maxDuration) * 200));
+
+        const strand = document.createElement('div');
+        strand.className = 'seaweed-strand';
+        strand.style.height = height + 'px';
+        strand.style.width = '40px';
+
+        // Add pulsing effect for active session
+        if (session.active) {
+          strand.style.animation = 'sway 3s ease-in-out infinite, pulse 1.5s ease-in-out infinite';
+          strand.style.filter = 'brightness(1.3)';
+        }
+
+        const tooltip = document.createElement('div');
+        tooltip.className = 'seaweed-tooltip';
+
+        const minutes = Math.floor(session.duration / 60);
+        const seconds = session.duration % 60;
+        const durationText = minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`;
+
+        tooltip.innerHTML = `
+          <strong>${session.active ? '🟢 Active Session' : 'Session'}</strong><br>
+          Duration: ${durationText}<br>
+          Start: ${session.start.toLocaleTimeString()}<br>
+          End: ${session.end.toLocaleTimeString()}
+        `;
+
+        seaweed.appendChild(strand);
+        seaweed.appendChild(tooltip);
+        container.appendChild(seaweed);
+      });
+    }
+
+    async function fetchDeskData() {
+      try {
+        // Fetch data from field 2 (presence in seconds)
+        const response = await fetch(
+          "https://api.thingspeak.com/channels/3145004/fields/2.json?api_key=1GTN9W4ZWXJRDPZO&results=100"
+        );
+        const data = await response.json();
+
+        if (data.feeds && data.feeds.length > 0) {
+          document.getElementById('loadingIndicator').style.display = 'none';
+          document.getElementById('mainContent').style.display = 'block';
+
+          // Get latest entry
+          const latestEntry = data.feeds[data.feeds.length - 1];
+          const currentPresence = parseInt(latestEntry.field2) || 0;
+          const isActive = currentPresence > 0;
+
+          // Update timer view
+          const timerStatus = document.getElementById('timerStatus');
+          const timerDisplay = document.getElementById('timerDisplay');
+          const wailordGif = document.getElementById('wailordGif');
+          const lockedInContainer = document.getElementById('lockedInContainer');
+          const awayInfo = document.getElementById('awayInfo');
+
+          if (isActive) {
+            timerStatus.textContent = 'Locked in 🐋';
+            timerStatus.classList.remove('away');
+            const minutes = Math.floor(currentPresence / 60);
+            const seconds = currentPresence % 60;
+            timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            timerDisplay.style.color = '#8ab4d5';
+            lockedInContainer.style.display = 'flex';
+            wailordGif.style.display = 'block';
+            awayInfo.style.display = 'none';
+          } else {
+            timerStatus.textContent = 'Away';
+            timerStatus.classList.add('away');
+            timerDisplay.style.color = '#ff6b6b';
+
+            // Find last active session to calculate away time
+            let lastActiveTime = null;
+            let lastActiveDuration = 0;
+
+            for (let i = data.feeds.length - 1; i >= 0; i--) {
+              const feed = data.feeds[i];
+              const presence = parseInt(feed.field2) || 0;
+              if (presence > 0) {
+                lastActiveTime = new Date(feed.created_at);
+                lastActiveDuration = presence;
+                break;
+              }
+            }
+
+            if (lastActiveTime) {
+              const now = new Date();
+              const awaySeconds = Math.floor((now - lastActiveTime) / 1000);
+              const awayMinutes = Math.floor(awaySeconds / 60);
+              const awaySecs = awaySeconds % 60;
+
+              timerDisplay.textContent = `${String(awayMinutes).padStart(2, '0')}:${String(awaySecs).padStart(2, '0')}`;
+
+              awayInfo.innerHTML = `Last seen: ${lastActiveTime.toLocaleTimeString()}<br>Duration: ${formatDuration(lastActiveDuration)}`;
+              awayInfo.style.display = 'block';
+            } else {
+              timerDisplay.textContent = '00:00';
+              awayInfo.style.display = 'none';
+            }
+
+            lockedInContainer.style.display = 'none';
+            wailordGif.style.display = 'none';
+          }
+
+          // Update last updated time
+          const lastUpdatedTime = new Date(latestEntry.created_at);
+          document.getElementById('lastUpdated').textContent =
+            `Last updated: ${lastUpdatedTime.toLocaleString()}`;
+
+          // Process sessions for today
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+
+          const sessions = [];
+          let sessionStart = null;
+
+          for (let i = 0; i < data.feeds.length; i++) {
+            const feed = data.feeds[i];
+            const feedDate = new Date(feed.created_at);
+            const presence = parseInt(feed.field2) || 0;
+
+            // Only process today's data
+            if (feedDate >= today) {
+              if (i > 0) {
+                const prevFeed = data.feeds[i - 1];
+                const prevPresence = parseInt(prevFeed.field2) || 0;
+                const prevDate = new Date(prevFeed.created_at);
+
+                // Session starts when presence goes from 0 to >0
+                if (prevPresence === 0 && presence > 0) {
+                  sessionStart = feedDate;
+                }
+
+                // Session ends when presence goes from >0 to 0
+                if (prevPresence > 0 && presence === 0) {
+                  sessions.push({
+                    start: sessionStart || prevDate,
+                    end: feedDate,
+                    duration: prevPresence
+                  });
+                  sessionStart = null;
+                }
+              }
+            }
+          }
+
+          // If currently active, add current session
+          if (isActive && sessionStart) {
+            sessions.push({
+              start: sessionStart,
+              end: new Date(),
+              duration: currentPresence,
+              active: true
+            });
+          }
+
+          // Update session count
+          document.getElementById('sessionCount').textContent = sessions.length;
+
+          // Calculate average session duration
+          if (sessions.length > 0) {
+            const avgDuration = sessions.reduce((sum, s) => sum + s.duration, 0) / sessions.length;
+            document.getElementById('averageSession').textContent =
+              formatDuration(Math.round(avgDuration));
+          } else {
+            document.getElementById('averageSession').textContent = '--';
+          }
+
+          // Create seaweed garden
+          createSeaweedGarden(sessions);
+
+        } else {
+          document.getElementById('loadingIndicator').textContent = 'No data available.';
+        }
+      } catch (error) {
+        console.error('Error fetching desk data:', error);
+        document.getElementById('loadingIndicator').textContent = 'Error loading data.';
+      }
+    }
+  </script>
+</body>
+</html>
