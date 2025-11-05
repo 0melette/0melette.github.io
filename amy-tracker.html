@@ -523,11 +523,23 @@
     const views = ['timerView', 'sessionsView', 'chartsView'];
     const viewTitles = ['🕐 Timer 🕐', '🌿 Sessions 🌿', '📊 Charts 📊'];
 
+    // Timer state tracking
+    let timerState = {
+      isActive: false,
+      baseSeconds: 0,
+      lastUpdateTime: null,
+      lastActiveTime: null,
+      lastActiveDuration: 0
+    };
+
     document.addEventListener('DOMContentLoaded', function() {
       createBubbles();
       fetchDeskData();
-      // Auto-refresh every 1 second for timer
-      setInterval(fetchDeskData, 1000);
+      // Auto-refresh every 5 seconds from ThingSpeak
+      setInterval(fetchDeskData, 5000);
+
+      // Update display every second
+      setInterval(updateTimerDisplay, 1000);
 
       // Keyboard navigation
       document.addEventListener('keydown', function(e) {
@@ -572,6 +584,32 @@
       // Update arrow button states
       document.getElementById('prevView').disabled = false;
       document.getElementById('nextView').disabled = false;
+    }
+
+    function updateTimerDisplay() {
+      if (!timerState.lastUpdateTime) return; // No data yet
+
+      const timerDisplay = document.getElementById('timerDisplay');
+
+      if (timerState.isActive) {
+        // Calculate elapsed time since last update
+        const now = Date.now();
+        const elapsedSeconds = Math.floor((now - timerState.lastUpdateTime) / 1000);
+        const currentSeconds = timerState.baseSeconds + elapsedSeconds;
+
+        const minutes = Math.floor(currentSeconds / 60);
+        const seconds = currentSeconds % 60;
+        timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      } else {
+        // Calculate away time
+        if (timerState.lastActiveTime) {
+          const now = Date.now();
+          const awaySeconds = Math.floor((now - timerState.lastActiveTime) / 1000);
+          const awayMinutes = Math.floor(awaySeconds / 60);
+          const awaySecs = awaySeconds % 60;
+          timerDisplay.textContent = `${String(awayMinutes).padStart(2, '0')}:${String(awaySecs).padStart(2, '0')}`;
+        }
+      }
     }
 
     function formatDuration(seconds) {
@@ -662,20 +700,21 @@
           const awayInfo = document.getElementById('awayInfo');
 
           if (isActive) {
+            // Update timer state for locked in
+            timerState.isActive = true;
+            timerState.baseSeconds = currentPresence;
+            timerState.lastUpdateTime = Date.now();
+
             timerStatus.textContent = 'Locked in 🐋';
             timerStatus.classList.remove('away');
-            const minutes = Math.floor(currentPresence / 60);
-            const seconds = currentPresence % 60;
-            timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
             timerDisplay.style.color = '#8ab4d5';
             lockedInContainer.style.display = 'flex';
             wailordGif.style.display = 'block';
             awayInfo.style.display = 'none';
-          } else {
-            timerStatus.textContent = 'Away';
-            timerStatus.classList.add('away');
-            timerDisplay.style.color = '#ff6b6b';
 
+            // Update display immediately
+            updateTimerDisplay();
+          } else {
             // Find last active session to calculate away time
             let lastActiveTime = null;
             let lastActiveDuration = 0;
@@ -690,14 +729,17 @@
               }
             }
 
+            // Update timer state for away
+            timerState.isActive = false;
+            timerState.lastActiveTime = lastActiveTime ? lastActiveTime.getTime() : null;
+            timerState.lastActiveDuration = lastActiveDuration;
+            timerState.lastUpdateTime = Date.now();
+
+            timerStatus.textContent = 'Away';
+            timerStatus.classList.add('away');
+            timerDisplay.style.color = '#ff6b6b';
+
             if (lastActiveTime) {
-              const now = new Date();
-              const awaySeconds = Math.floor((now - lastActiveTime) / 1000);
-              const awayMinutes = Math.floor(awaySeconds / 60);
-              const awaySecs = awaySeconds % 60;
-
-              timerDisplay.textContent = `${String(awayMinutes).padStart(2, '0')}:${String(awaySecs).padStart(2, '0')}`;
-
               awayInfo.innerHTML = `Last seen: ${lastActiveTime.toLocaleTimeString()}<br>Duration: ${formatDuration(lastActiveDuration)}`;
               awayInfo.style.display = 'block';
             } else {
@@ -707,6 +749,9 @@
 
             lockedInContainer.style.display = 'none';
             wailordGif.style.display = 'none';
+
+            // Update display immediately
+            updateTimerDisplay();
           }
 
           // Update last updated time
